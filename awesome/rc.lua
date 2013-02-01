@@ -43,8 +43,8 @@ beautiful.init(home .. "/.config/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 navigateur = "chromium"
-file_manager = "ranger"
 terminal = "urxvtc"
+file_manager = terminal .. " -e ranger"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 directory_walllpaper = home .. "/images/wallpaper_awesome/"
