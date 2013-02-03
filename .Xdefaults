@@ -1,6 +1,27 @@
-*background:   black
-*foreground:   white
-
+#*background:   black
+#*foreground:   white
+#*font            : xft:Bitstream Vera Sans Mono-8.5
+*background      : black
+#*foreground      : white
+*scrollBar       : false
+*modifier        : mod4
+*urllauncher     : chromium
+*matcher.button  : 3
+*saveLines       : 8192
+#*perl-ext-common : default,matcher
+#*transparent     : True
+#*shading         : 40
+#*fading          : 60
+#*font: xft:erusfont
+*foreground: #ababab
+*background: #181818
+*color0: #1b1b1b
+*color1: #ff6b6b
+*color2: #a3d46e
+*color3: #eaca75
+*color4: #435e87
+*color5: #cf8243
+*color6: #789ec6
 #Modifie les touches (pour les raccourcis dans vim notamment)
 URxvt.keysym.Control-Up:   \033[1;5A
 URxvt.keysym.Control-Down:    \033[1;5B
