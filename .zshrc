@@ -1,6 +1,8 @@
 #!/usr/bin/zsh
-# ~/.zhrc
-#
+
+#Général
+umask 0066
+
 # Variables
 export HISTFILE=~/.histfile
 export HISTSIZE=1000
@@ -31,7 +33,7 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 
 # Correction
-setopt correctall
+# setopt correctall
 
 # Auto-complétion
 autoload -U compinit

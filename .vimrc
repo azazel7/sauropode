@@ -4,6 +4,8 @@ set number
 set showmatch " montrer les correspondance entre les parentheses
 set backupcopy=no
 
+source $HOME/.vim/colors/color1.vim
+
 " Raccourci
 " Onglet
 map <C-right> :tabnext<CR>

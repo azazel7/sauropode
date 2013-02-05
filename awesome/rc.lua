@@ -38,7 +38,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-home = "/home/tarte"
+home = "/home/magoa"
 beautiful.init(home .. "/.config/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
@@ -112,7 +112,7 @@ montimer:start()
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "Tzeentch", "Nurgle", "Grenth", "Dwayna", "Melendru", "Lyssa", "", 8, 9 }, s, layouts[2])
+    tags[s] = awful.tag({ "Tzeentch", "Nurgle", "Grenth", "Dwayna", "Melendru", "Lyssa", "7", 8, 9 }, s, layouts[2])
 end
 -- }}}
 
@@ -275,7 +275,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ modkey,           }, "g",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
