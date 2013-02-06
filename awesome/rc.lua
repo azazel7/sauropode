@@ -48,8 +48,12 @@ file_manager = terminal .. " -e ranger"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 directory_walllpaper = home .. "/images/wallpaper_awesome/"
-timeout_wallpaper = 60 --en seconde
+timeout_wallpaper = 90 --en seconde
 lockscreen = "xlock"
+lecteur_musique = "mocp"
+lecteur_musique_next = "--next"
+lecteur_musique_previous = "--previous"
+lecteur_musique_pause_play = "--toggle-pause"
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -112,7 +116,7 @@ montimer:start()
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "Tzeentch", "Nurgle", "Grenth", "Dwayna", "Melendru", "Lyssa", "7", 8, 9 }, s, layouts[2])
+    tags[s] = awful.tag({ "β", "χ", "Ω", "α", "μ", "λ", "Φ", "φ", "π" }, s, layouts[2])
 end
 -- }}}
 
@@ -294,6 +298,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, 	  }, "F9", function () awful.util.spawn("amixer sset Master 5dB+") end),
     awful.key({ modkey, 	  }, "w", function () changer_wallpaper() end),
     awful.key({ modkey, 	  }, "l", function () awful.util.spawn(lockscreen) end),
+    awful.key({ modkey, "Control" }, "n", function () awful.util.spawn(lecteur_musique .. " " .. lecteur_musique_next) end),
+    awful.key({ modkey, "Control" }, "p", function () awful.util.spawn(lecteur_musique .. " " .. lecteur_musique_previous) end),
+    awful.key({ modkey, "Control" }, "space", function () awful.util.spawn(lecteur_musique .. " " .. lecteur_musique_pause_play) end),
 
     -- Commande de changement de moniteur
     awful.key({ modkey, 	  }, "Up",
@@ -345,7 +352,7 @@ globalkeys = awful.util.table.join(
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+    -- awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),

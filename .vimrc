@@ -21,8 +21,11 @@ map <C-a> ggVG
 map <F9> :set invpaste paste?<CR>i
 " Afficher l'arbre des fichiers
 map <F12> :NERDTreeToggle<CR>
+imap <C-o> <ESC>:NERDTreeToggle<CR>
 " Afficher la liste des tâches
 map <F11> :TaskList<CR>
+" Afficher la sortie des executables externes
+map <F7> :!<CR>
 
 let NERDTreeWinPos="right"
 let NERDChristmasTree=1
