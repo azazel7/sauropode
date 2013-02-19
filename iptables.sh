@@ -75,9 +75,35 @@ function ServerAccept
 	# $1 : Port
 	# $2 : Protocol
 
-        echo "[*] Accept Server to $1"
+        if [ $# -eq 3 ];then
+                echo "[*] Accept to connect to $3 as a Server"
+        else
+                echo "[*] Accept to connect to $1 as Server"
+        fi
         $IPTABLES -A INPUT -i $INTERFACE -p $2 -m $2 --dport $1 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
         $IPTABLES -A OUTPUT -o $INTERFACE -p $2 -m $2 --sport $1 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+}
+function OpenClient
+{
+	# $1 : Port
+	# $2 : Protocol (Optionnal)
+	if [ -z $2 ]; then
+		ClientAccept $1 tcp "$1 (TCP)"
+		ClientAccept $1 udp "$1 (UDP)"
+	else
+		ClientAccept $1 $2
+	fi
+}
+function OpenServer
+{
+	# $1 : Port
+	# $2 : Protocol (Optionnal)
+	if [ -z $2 ]; then
+		ServerAccept $1 tcp "$1 (TCP)"
+		ServerAccept $1 udp "$1 (UDP)"
+	else
+		ServerAccept $1 $2
+	fi
 }
 function Cleaning
 {
@@ -258,6 +284,24 @@ function Config3
         $IPTABLES -A INPUT -j ACCEPT
         echo '[*] Accept all INPUT traffic'
 }
+
+# Need Root Privileges
+if [ -n $UID ] && [ $UID -ne 0 ]; then
+        Error 'You must be root'
+        exit 1
+elif [ `id -u` -ne 0 ]; then
+        Error 'You must be root'
+        exit 1
+fi
+# Check PID file
+if [ -f /var/run/$NAME.pid ]; then
+        Error "The script is already running, if isn't the case, then remove /var/run/$NAME.pid and run the script."
+        exit 1
+else
+        echo $$ > /var/run/$NAME.pid
+        /bin/chmod 600 /var/run/$NAME.pid
+fi
+
 # Parameters
 while [ $# -gt 0 ]; do
         case $1 in
@@ -291,11 +335,16 @@ while [ $# -gt 0 ]; do
 			PORT=$1
 			shift
 			PROTOCOL=$1
-			ClientAccept $PORT $PROTOCOL 
+			OpenClient $PORT $PROTOCOL 
 			MODIFICATION=1
                 ;;
 		--open-server | -os)
-			
+			shift
+			PORT=$1
+			shift
+			PROTOCOL=$1
+			OpenServer $PORT $PROTOCOL 
+			MODIFICATION=1
                 ;;
                 *)
                         PrintHelp
@@ -303,23 +352,6 @@ while [ $# -gt 0 ]; do
         esac
         shift
 done
-# Need Root Privileges
-if [ -n $UID ] && [ $UID -ne 0 ]; then
-        Error 'You must be root'
-        exit 1
-elif [ `id -u` -ne 0 ]; then
-        Error 'You must be root'
-        exit 1
-fi
-# Check PID file
-if [ -f /var/run/$NAME.pid ]; then
-        Error "The script is already running, if isn't the case, then remove /var/run/$NAME.pid and run the script."
-        exit 1
-else
-        echo $$ > /var/run/$NAME.pid
-        /bin/chmod 600 /var/run/$NAME.pid
-fi
-
 if [ $MODIFICATION -eq 0 ]; then
 	# Starting...
 	modprobe ip_conntrack
