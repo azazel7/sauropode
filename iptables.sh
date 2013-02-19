@@ -26,11 +26,12 @@
 # Default Parameters
 NAME='iptables.sh'
 IPTABLES='/usr/sbin/iptables'
-INTERFACE='wlan0' #eth0
+INTERFACE='wlp5s0'
 DROPorREJECT='DROP'
 CONFIG=1
 VERSION='0.2'
 COLOR=1
+MODIFICATION=0
 
 # Functions
 function Error
@@ -47,6 +48,8 @@ function PrintHelp
         echo "          -i, --interface INTERFACE               Interface (Default : wlan0)"
         echo "          -b, --binary BINARY                     Iptables's binary (Default : /usr/sbin/iptables)"
         echo "          -a, --action-to-refuse ACTION           What will do the script to refuse a connection. DROP or REJECT (Default : DROP)"
+        echo "          -oc, --open-client PORT PROTOCOL        Open a PORT with the PROTOCOL as client"
+        echo "          -os, --open-server PORT PROTOCOL        Open a PORT with the PROTOCOL as server"
         exit 0
 }
 function PrintVersion
@@ -60,12 +63,21 @@ function ClientAccept
         # $2 : Protocol
         # $3 : Service's name (Optionnal)
         if [ $# -eq 3 ];then
-                echo "[*] Accept to connect to $3 as a client"
+                echo "[*] Accept to connect to $3 as a Client"
         else
                 echo "[*] Accept to connect to $1 as Client"
         fi
         $IPTABLES -A INPUT -i $INTERFACE -p $2 -m $2 --sport $1 -m conntrack --ctstate ESTABLISHED -j ACCEPT
         $IPTABLES -A OUTPUT -o $INTERFACE -p $2 -m $2 --dport $1 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+}
+function ServerAccept
+{
+	# $1 : Port
+	# $2 : Protocol
+
+        echo "[*] Accept Server to $1"
+        $IPTABLES -A INPUT -i $INTERFACE -p $2 -m $2 --dport $1 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+        $IPTABLES -A OUTPUT -o $INTERFACE -p $2 -m $2 --sport $1 -m conntrack --ctstate ESTABLISHED -j ACCEPT
 }
 function Cleaning
 {
@@ -203,20 +215,20 @@ function Config1
         ClientAccept 53 tcp 'DNS (TCP)'
         ClientAccept 53 udp 'DNS (UDP)'
 #       ClientAccept 23399 tcp Skype
-       ClientAccept 22 tcp SSH
+       	ClientAccept 22 tcp SSH
 #       ClientAccept 995 tcp POP3S
 #       ClientAccept 143 tcp IMAP
 #       ClientAccept 993 tcp IMAPS
 #       ClientAccept 25 tcp SMTP
 #       ClientAccept 465 tcp SMTPS
-	ClientAccept 14210 tcp "GIT Seppuku"
+	ClientAccept 14210 tcp "GIT Statler"
 #       ClientAcceptFTP
         ClientAcceptICMP
 #       ClientAccept 12975 tcp Hamachi
 #       ClientAccept 32976 tcp Hamachi
 #       ClientAccept 17771 udp Hamachi
 #       ClientAccept 6600 tcp MPD
-        modprobe ip_conntrack_irc
+# 	modprobe ip_conntrack_irc
 #       ClientAccept 6667 tcp IRC
 #       ClientAccept 9999 tcp IRC-SSL
 #       ClientAccept 9418 tcp "GIT (TCP)"
@@ -274,6 +286,17 @@ while [ $# -gt 0 ]; do
                 --no-colors | -n)
                         COLOR=0
                 ;;
+		--open-client | -oc)
+			shift
+			PORT=$1
+			shift
+			PROTOCOL=$1
+			ClientAccept $PORT $PROTOCOL 
+			MODIFICATION=1
+                ;;
+		--open-server | -os)
+			
+                ;;
                 *)
                         PrintHelp
                 ;;
@@ -297,11 +320,14 @@ else
         /bin/chmod 600 /var/run/$NAME.pid
 fi
 
-# Starting...
-modprobe ip_conntrack
-Cleaning
-Initializing
-AcceptLoopback
-Config$CONFIG
+if [ $MODIFICATION -eq 0 ]; then
+	# Starting...
+	modprobe ip_conntrack
+	Cleaning
+	Initializing
+	AcceptLoopback
+	Config$CONFIG
+fi
 rm /var/run/$NAME.pid
 exit 0
+
