@@ -49,11 +49,11 @@ editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 directory_walllpaper = home .. "/images/wallpaper_awesome/"
 timeout_wallpaper = 90 --en seconde
-lockscreen = "xlock"
-lecteur_musique = "mocp"
-lecteur_musique_next = "--next"
-lecteur_musique_previous = "--previous"
-lecteur_musique_pause_play = "--toggle-pause"
+lockscreen = "xlock -mode lyapunov"
+lecteur_musique = "mpc"
+lecteur_musique_next = "next"
+lecteur_musique_previous = "prev"
+lecteur_musique_pause_play = "toggle"
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -101,16 +101,19 @@ function changer_wallpaper()
 end
 
 --On créer le timer
-montimer = timer({timeout = timeout_wallpaper})
+--montimer = timer({timeout = timeout_wallpaper})
 --On lui associe un signal et la fonction
-montimer:connect_signal("timeout",function () changer_wallpaper() end)
+--montimer:connect_signal("timeout",function () changer_wallpaper() end)
 --On initialise les wallpapers
-changer_wallpaper()
+--changer_wallpaper()
 --on demarre le timer
-montimer:start()
-
+--montimer:start()
+--beautiful.wallpaper = {"/home/magoa/images/fond1.jpg"}
 -- }}}
-
+--mesWall = {"/home/magoa/images/wallpaper-2640542.jpg"}
+--gears.wallpaper.maximized(mesWall[1], 1, true)
+changer_wallpaper()
+--changer_wallpaper()
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
@@ -294,13 +297,17 @@ globalkeys = awful.util.table.join(
     -- Commande de lancement d'application
     awful.key({ modkey, 	  }, "n", function () awful.util.spawn(navigateur) end),
     awful.key({ modkey, 	  }, "e", function () awful.util.spawn(file_manager) end),
-    awful.key({ modkey, 	  }, "F8", function () awful.util.spawn("amixer sset Master 5dB-") end),
-    awful.key({ modkey, 	  }, "F9", function () awful.util.spawn("amixer sset Master 5dB+") end),
+    awful.key({ modkey, 	  }, "F8", function () awful.util.spawn("amixer sset Master 5dB-;") end),
+    awful.key({ modkey, 	  }, "F9", function () awful.util.spawn("amixer sset Master 5dB+;") end),
+    awful.key({ modkey, 	  }, "F10", function () awful.util.spawn("amixer sset Master 0dB+ toggle") end),
     awful.key({ modkey, 	  }, "w", function () changer_wallpaper() end),
+		
     awful.key({ modkey, 	  }, "l", function () awful.util.spawn(lockscreen) end),
     awful.key({ modkey, "Control" }, "n", function () awful.util.spawn(lecteur_musique .. " " .. lecteur_musique_next) end),
     awful.key({ modkey, "Control" }, "p", function () awful.util.spawn(lecteur_musique .. " " .. lecteur_musique_previous) end),
     awful.key({ modkey, "Control" }, "space", function () awful.util.spawn(lecteur_musique .. " " .. lecteur_musique_pause_play) end),
+    awful.key({ modkey, "Control" }, "F8", function () awful.util.spawn(lecteur_musique .. " volume -7") end),
+    awful.key({ modkey, "Control" }, "F9", function () awful.util.spawn(lecteur_musique .. " volume +7") end),
 
     -- Commande de changement de moniteur
     awful.key({ modkey, 	  }, "Up",

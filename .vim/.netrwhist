@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/users/info2/martin.khannouz/public_html/ProjetPHP/azerty'
 let g:netrw_dirhist_2='/home/users/info2/martin.khannouz/git/mensonge/src/core/BaseDeDonnee'
+let g:netrw_dirhist_3='/home/magoa/Journal/quotidien'
+let g:netrw_dirhist_4='/home/magoa/Journal/stage'

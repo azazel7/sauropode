@@ -1,8 +1,7 @@
 #!/usr/bin/zsh
-
 #Général
 umask 0066
-
+PATH=$PATH:/home/script:.
 # Variables
 export HISTFILE=~/.histfile
 export HISTSIZE=1000
@@ -19,7 +18,7 @@ alias ll='ls -lA'
 alias cp='cp --interactive'
 alias mv='mv --interactive'
 alias rm='rm --interactive --verbose'
-alias Xrecord='ffmpeg -f x11grab -s 1280x800 -r 25 -i :0.0 -sameq /tmp/out.mkv'
+alias Xrecord='ffmpeg -f x11grab -s 1280x800 -r 25 -i :0.0 -qscale 0 /tmp/out.mkv'
 
 # Options
 unsetopt beep
@@ -75,3 +74,4 @@ case $TERM in
 	bindkey "^[[B" down-line-or-search
 ;;
 esac
+

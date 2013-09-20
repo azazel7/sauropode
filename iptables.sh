@@ -242,23 +242,30 @@ function Config1
         ClientAccept 53 udp 'DNS (UDP)'
 #       ClientAccept 23399 tcp Skype
        	ClientAccept 22 tcp SSH
-#       ClientAccept 995 tcp POP3S
+        ClientAccept 587 tcp SMTP
+        ClientAccept 995 tcp POP3S
 #       ClientAccept 143 tcp IMAP
-#       ClientAccept 993 tcp IMAPS
+        ClientAccept 465 tcp 'SMTPS (Enseirb)' 
+        ClientAccept 993 tcp 'IMAPS (Enseirb)'
 #       ClientAccept 25 tcp SMTP
-#       ClientAccept 465 tcp SMTPS
-	ClientAccept 14210 tcp "GIT Statler"
+#	ClientAccept 14210 tcp "GIT Statler"
+	ClientAccept 10000 tcp "Azanarel.no-ip.biz http"
+	ClientAccept 10001 tcp "Azanarel.no-ip.biz ssh"
+	ClientAccept 29109 tcp "Emeraude ssh"
+	ClientAccept 500 udp "VPN cisco 500 (UDP)"
+	ClientAccept 4500 udp "VPN cisco 4500 (UDP)"
+	ClientAccept 10000 udp "VPN cisco 10000 (UDP)"
 #       ClientAcceptFTP
         ClientAcceptICMP
 #       ClientAccept 12975 tcp Hamachi
 #       ClientAccept 32976 tcp Hamachi
 #       ClientAccept 17771 udp Hamachi
 #       ClientAccept 6600 tcp MPD
-# 	modprobe ip_conntrack_irc
-#       ClientAccept 6667 tcp IRC
+ 	modprobe ip_conntrack_irc
+        ClientAccept 6667 tcp IRC
 #       ClientAccept 9999 tcp IRC-SSL
 #       ClientAccept 9418 tcp "GIT (TCP)"
-#       ClientAccept 25565 tcp "Minecraft (TCP)"
+        ClientAccept 25565 tcp "Minecraft (TCP)"
 #       ServerAcceptHTTP
 #       ServerAcceptMPD
 #       ServerAcceptPentest
