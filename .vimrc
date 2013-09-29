@@ -22,7 +22,7 @@ imap <C-o> <ESC>:NERDTreeToggle<CR>
 map <F11> :TaskList<CR>
 " Recharger les tag pour omnicomplete et ainsi mettre à jour les classes en C++
 " map <F10> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q<CR>
-map <F10> :%!$HOME/.vim/indent -st -bap -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 -ts4<CR> 
+map <F10> :%!$HOME/.vim/indent -st -bap -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 -ts4 -ut -bad -cdw -i4 -ppi3 -pmt<CR> 
 " Passer ou sortir du mode collage
 map <F9> :set invpaste paste?<CR>i
 " Sauvegarde
