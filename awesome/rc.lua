@@ -50,6 +50,7 @@ editor_cmd = terminal .. " -e " .. editor
 directory_walllpaper = home .. "/images/wallpaper_awesome/"
 timeout_wallpaper = 90 --en seconde
 lockscreen = "xlock -mode lyapunov"
+screenshot = "scrot " .. home .. "/screenshot.png"
 lecteur_musique = "mpc"
 lecteur_musique_next = "next"
 lecteur_musique_previous = "prev"
@@ -308,6 +309,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "space", function () awful.util.spawn(lecteur_musique .. " " .. lecteur_musique_pause_play) end),
     awful.key({ modkey, "Control" }, "F8", function () awful.util.spawn(lecteur_musique .. " volume -7") end),
     awful.key({ modkey, "Control" }, "F9", function () awful.util.spawn(lecteur_musique .. " volume +7") end),
+    --Print screen (screenshot)
+    awful.key({ 	 	  }, "Print", function () awful.util.spawn(screenshot) end),
 
     -- Commande de changement de moniteur
     awful.key({ modkey, 	  }, "Up",
@@ -318,6 +321,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, 	  }, "Down",
     function ()
 	awful.screen.focus_relative(-1)
+    end),
+
+    awful.key({ modkey, "Shift"	  }, "Up",
+    function (c)
+	awful.client.movetoscreen(client.focus,client.focus.screen-1)
+    end),
+
+    awful.key({ modkey, "Shift"	  }, "Down",
+    function (c)
+	awful.client.movetoscreen(client.focus,client.focus.screen+1)
     end),
 
     -- Commande de changement de tags
@@ -342,6 +355,10 @@ globalkeys = awful.util.table.join(
 	awful.tag.viewnext()
     end),
 
+
+    -- FIN COMMANDE PERSO
+    -- ------------------------------------------------------------------------------------
+
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
@@ -361,14 +378,14 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     -- awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
+    --awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",
-        function (c)
+    --awful.key({ modkey,           }, "n",
+        --function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end),
+            --c.minimized = true
+        --end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
