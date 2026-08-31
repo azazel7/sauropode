@@ -17,7 +17,6 @@ in
 	home.homeDirectory = "/home/magoa";
   home.sessionVariables.EDITOR = "nvim";
   home.sessionVariables.VISUAL = "nvim";
-	programs.git.enable = true;
 #  programs.neovim = {
 #    enable = true;
 #    vimAlias = true;
@@ -30,6 +29,11 @@ in
 			btw = "echo i use nixos, btw";
 		};
 	};
+  programs.git = {
+    enable = true;
+    userName = "Martin";
+    userEmail = "martin@example.com";
+  };
 	home.packages = with pkgs; [
 		neovim
 			ripgrep
