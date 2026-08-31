@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+dotfiles = "${config.home.homeDirectory}/sauropode/config";
 create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 # Standard .config/directory
 configs = {
@@ -15,13 +15,13 @@ in
 {
 	home.username = "magoa";
 	home.homeDirectory = "/home/magoa";
-  home.sessionVariables.EDITOR = "nvim";
-  home.sessionVariables.VISUAL = "nvim";
-#  programs.neovim = {
-#    enable = true;
-#    vimAlias = true;
-#    viAlias = true;
-#  };
+	home.sessionVariables.EDITOR = "nvim";
+	home.sessionVariables.VISUAL = "nvim";
+	programs.neovim = {
+		enable = true;
+		vimAlias = true;
+		viAlias = true;
+	};
 	home.stateVersion = "25.05";
 	programs.bash = {
 		enable = true;
@@ -29,13 +29,12 @@ in
 			btw = "echo i use nixos, btw";
 		};
 	};
-  programs.git = {
-    enable = true;
-    userName = "Martin";
-    userEmail = "martin@example.com";
-  };
+	programs.git = {
+		enable = true;
+		userName = "Martin";
+		userEmail = "martin@example.com";
+	};
 	home.packages = with pkgs; [
-		neovim
 			ripgrep
 			nil
 			nixpkgs-fmt
