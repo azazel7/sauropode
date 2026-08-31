@@ -12,7 +12,7 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/Toronto";
 
   console.keyMap = "fr";
 
