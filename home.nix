@@ -17,11 +17,9 @@ in
 	home.homeDirectory = "/home/magoa";
 	home.sessionVariables.EDITOR = "nvim";
 	home.sessionVariables.VISUAL = "nvim";
-	programs.neovim = {
-		enable = true;
-		vimAlias = true;
-		viAlias = true;
-	};
+	imports = [
+		./modules/neovim.nix
+	];
 	home.stateVersion = "25.05";
 	programs.bash = {
 		enable = true;
