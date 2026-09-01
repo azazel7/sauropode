@@ -34,12 +34,18 @@
 
   users.users.magoa = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "users" ];
     packages = with pkgs; [
       tree
     ];
+    useDefaultShell = false; 
+    
+    # Set fish as the default user shell
+    shell = pkgs.fish;
   };
 
+
+  programs.fish.enable = true;
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -56,4 +62,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";
 
+  # For fish. CRITICAL FOR FLAKES: Disable the standard channel-based command-not-found handler
+  programs.command-not-found.enable = false;
 }

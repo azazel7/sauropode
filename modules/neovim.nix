@@ -1,21 +1,21 @@
-{ config, pkgs, lib, ...}
+{ config, pkgs, lib, ...}:
 
 {
   # Install Neovim and dependencies
-  # home.packages = with pkgs; [
+   home.packages = with pkgs; [
     # Tools required for Telescope
-    # ripgrep
-    # fd
-    # fzf
+     ripgrep
+     fd
+     fzf
 
     # Language Servers
-    # lua-language-server
-    # nil # nix language server
-    # nixpkgs-fmt # nix formatter
+     lua-language-server
+     nil # nix language server
+     nixpkgs-fmt # nix formatter
 
     # Needed for lazy.nvim
-    # nodejs
-  # ];
+     nodejs
+   ];
 
   programs.neovim = {
     enable = true;

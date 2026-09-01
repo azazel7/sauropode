@@ -19,6 +19,7 @@ in
 	home.sessionVariables.VISUAL = "nvim";
 	imports = [
 		./modules/neovim.nix
+		./modules/fish.nix
 	];
 	home.stateVersion = "25.05";
 	programs.bash = {
