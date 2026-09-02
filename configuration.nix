@@ -49,7 +49,7 @@
 
   users.users.magoa = {
     isNormalUser = true;
-    extraGroups = [ "users" ];
+    extraGroups = [ "wheel" ]; # Keep wheel for root access
     packages = with pkgs; [
       tree
     ];
