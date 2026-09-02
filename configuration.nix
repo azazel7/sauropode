@@ -16,7 +16,22 @@
 
   console.keyMap = "fr";
 
+
+  # For battery saving
+  services.tlp.enable = true;
+  # for intel CPU to avoid over heating
+  services.thermald.enable = true;
   services.displayManager.ly.enable = true;
+
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+  
+  nix.settings.auto-optimise-store = true;
+
   services.xserver = {
     enable = true;
     autoRepeatDelay = 300;
@@ -53,6 +68,7 @@
     wget
     alacritty
     git
+    light
   ];
 
   fonts.packages = with pkgs; [
