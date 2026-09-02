@@ -10,13 +10,17 @@
 
     # Language Servers
      lua-language-server
-     nil # nix language server
-     nixpkgs-fmt # nix formatter
-
+     nil                  # nix language server
+     nixpkgs-fmt          # nix formatter
+     rust-analyzer        # rust language server
+     rustc
+     cargo
+     # rustPlatform.rustLibSrc
     # Needed for lazy.nvim
      nodejs
    ];
 
+  # RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
   programs.neovim = {
     enable = true;
     viAlias = true;
