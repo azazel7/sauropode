@@ -1,0 +1,80 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+# ─────────────────────────────────────────────────────────────
+# Prompt layout
+# ─────────────────────────────────────────────────────────────
+
+format = """
+[╭─](#4E4E4E) $status\
+[ in ](#4E4E4E)\
+$directory\
+$git_branch\
+$git_status\
+$line_break\
+$python\
+$character"""
+
+# ─────────────────────────────────────────────────────────────
+# Command status
+# ─────────────────────────────────────────────────────────────
+
+[status]
+disabled = false
+symbol = "✘"
+success_symbol = "✔"
+format = "[$symbol]($style)"
+style = "#098609"
+failure_style = "#DC2D35"
+
+# ─────────────────────────────────────────────────────────────
+# Directory
+# ─────────────────────────────────────────────────────────────
+
+[directory]
+format = "[$path](#590092)"
+home_symbol = "⌁"
+truncation_length = 0
+truncate_to_repo = false
+
+# ─────────────────────────────────────────────────────────────
+# Git
+# ─────────────────────────────────────────────────────────────
+
+[git_branch]
+format = " [($branch)](#FF8C19)"
+
+[git_status]
+format = " [$all_status$ahead_behind](#DF005F)"
+
+conflicted = "⚔"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕"
+up_to_date = ""
+untracked = "?"
+stashed = "≡"
+modified = "✚"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+# ─────────────────────────────────────────────────────────────
+# Python virtual environment
+# ─────────────────────────────────────────────────────────────
+
+[python]
+format = " [($virtualenv)](#FF8C19)"
+
+# ─────────────────────────────────────────────────────────────
+# Prompt character
+# ─────────────────────────────────────────────────────────────
+
+[character]
+success_symbol = "[╰─λ](#4E4E4E)"
+error_symbol = "[╰─λ](#4E4E4E)"
+vimcmd_symbol = "[╰─V](#4E4E4E)"
+vimcmd_replace_one_symbol = "[╰─V](#4E4E4E)"
+vimcmd_replace_symbol = "[╰─V](#4E4E4E)"
+vimcmd_visual_symbol = "[╰─V](#4E4E4E)"
