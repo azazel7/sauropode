@@ -31,6 +31,13 @@
   
   nix.settings.auto-optimise-store = true;
 
+  # programs.noctalia-shell = {
+  #   enable = true;
+  #   systemd.enable = true;
+  # };
+  programs.xwayland.enable = true;
+  programs.niri.enable = true;
+  services.displayManager.defaultSession = "niri";
   services.xserver = {
     enable = true;
     autoRepeatDelay = 300;
@@ -63,7 +70,6 @@
 
 
   programs.fish.enable = true;
-  # programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
     neovim

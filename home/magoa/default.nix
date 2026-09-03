@@ -8,6 +8,7 @@ configs = {
 	qtile = "qtile";
 	nvim = "nvim";
 	ranger = "ranger";
+  niri = "niri";
 };
 in
 
