@@ -18,7 +18,7 @@
     enable = true;
 
     settings = builtins.fromTOML (
-      builtins.readFile ../config/starship.toml
+      builtins.readFile ../dotfiles/starship.toml
     );
   };
 

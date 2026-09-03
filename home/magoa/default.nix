@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-dotfiles = "${config.home.homeDirectory}/sauropode/config";
+dotfiles = "${config.home.homeDirectory}/sauropode/dotfiles";
 create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 # Standard .config/directory
 configs = {
@@ -18,9 +18,9 @@ in
 	home.sessionVariables.EDITOR = "nvim";
 	home.sessionVariables.VISUAL = "nvim";
 	imports = [
-		./modules/neovim.nix
-		./modules/fish.nix
-		./modules/firefox.nix
+		../../modules/neovim.nix
+		../../modules/fish.nix
+		../../modules/firefox.nix
 	];
 	home.stateVersion = "25.05";
 	programs.bash = {
