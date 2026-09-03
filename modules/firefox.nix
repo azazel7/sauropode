@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   lock-false = {
@@ -9,6 +9,9 @@ let
     Value = true;
     Status = "locked";
   };
+  newtabWallpaperId = "1a0b388c-db2c-4f86-b953-0e5302573258";
+
+  newtabWallpaper = ../assets/firefox-newtab-wallpaper.svg;
 in
 {
   programs = {
@@ -182,6 +185,9 @@ in
             "privacy.clearOnShutdown.cookies" = true;
             "privacy.clearOnShutdown.cache" = true;
             "browser.toolbars.bookmarks.visibility" = "always"; # or "newtab" / "never"
+              /*New Tab wallpaper*/
+            "browser.newtabpage.activity-stream.newtabWallpapers.enabled" = true;
+            "browser.newtabpage.activity-stream.newtabWallpapers.wallpaper" = newtabWallpaperId;
           };
           bookmarks = {
             force = true;
@@ -192,11 +198,17 @@ in
               toolbar = true;
               bookmarks = [
               { name = "FireMem";  url = "about:memory"; }
-              { name = "NixOS";  url = "https://nixos.org"; }
-              { name = "GitHub"; url = "https://github.com"; }
+              { name = "Desjardin"; url = "https://accweb.mouv.desjardins.com/identifiantunique/securite-garantie/authentification/auth/simple/0?domaineVirtuel=desjardins&langueCible=fr"; }
+              { name = "Google Chat";  url = "https://chat.google.com/app/home"; }
+              { name = "Google Meeting";  url = "https://meet.google.com/ids-ftpy-nab?pli=1"; }
+              { name = "Thailong";  url = "https://thailong.fliipapp.com/home/login"; }
+
+
               {
                 name = "Dev";
                 bookmarks = [
+                { name = "NixOS";  url = "https://nixos.org"; }
+                { name = "GitHub"; url = "https://github.com"; }
                 { name = "Home Manager options"; url = "https://nix-community.github.io/home-manager/options.xhtml"; }
                 { name = "MyNixOS"; url = "https://mynixos.com"; }
                 ];
@@ -204,16 +216,17 @@ in
               ];
             }
 
-            # Bookmarks in the regular Bookmarks Menu (not on the toolbar)
+            /* Bookmarks in the regular Bookmarks Menu (not on the toolbar) */
             {
               name = "Streaming";
               bookmarks = [
               { name = "YouTube"; url = "https://youtube.com"; }
-              { name = "Twitch";  url = "https://www.twitch.tv"; }
+              { name = "Twitch Clemovitch";  url = "https://www.twitch.tv/clemovitch/schedule"; }
+              { name = "Twitch Nat_Ali";  url = "https://www.twitch.tv/nat_ali/schedule"; }
               ];
             }
 
-            # A standalone bookmark with a keyword shortcut + tags
+            /* A standalone bookmark with a keyword shortcut + tags */
             {
               name = "Wikipedia";
               url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
@@ -227,6 +240,16 @@ in
       };
     };
   };
+  home.activation.firefoxNewtabWallpaper =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    wallpaper_dir="$HOME/.mozilla/firefox/profile_0/wallpaper"
+
+    mkdir -p "$wallpaper_dir"
+
+    ln -sfn \
+    "${newtabWallpaper}" \
+    "$wallpaper_dir/${newtabWallpaperId}.svg"
+    '';
 }
 
 
