@@ -20,6 +20,7 @@ in
 	imports = [
 		./modules/neovim.nix
 		./modules/fish.nix
+		./modules/firefox.nix
 	];
 	home.stateVersion = "25.05";
 	programs.bash = {
