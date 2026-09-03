@@ -23,7 +23,6 @@
   services.thermald.enable = true;
   services.displayManager.ly.enable = true;
 
-
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -49,7 +48,10 @@
 
   users.users.magoa = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Keep wheel for root access
+    extraGroups = [ 
+      "wheel" # Keep wheel for root access
+      "audio" #for pulse audio
+    ]; 
     packages = with pkgs; [
       tree
     ];
@@ -61,10 +63,10 @@
 
 
   programs.fish.enable = true;
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
-    vim
+    neovim
     wget
     alacritty
     git
