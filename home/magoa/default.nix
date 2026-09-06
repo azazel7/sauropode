@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
 dotfiles = "${config.home.homeDirectory}/sauropode/dotfiles";
@@ -24,8 +24,24 @@ in
 		../../modules/fish.nix
 		../../modules/firefox.nix
 		../../modules/pamixer.nix
-		# ../../modules/niri.nix
+    # inputs.noctalia.homeManagerModules.default
 	];
+	# programs.noctalia = {
+ #      enable = true;
+	#
+ #      settings = { # This may also be a string or path to a .toml file.
+ #        theme = {
+ #          mode = "dark";
+ #          source = "builtin";
+ #          builtin = "Catppuccin";
+ #        };
+	#
+ #        # wallpaper = {
+ #        #   enabled = true;
+ #        #   default.path = "/path/to/wallpapers/wallpaper.png";
+ #        # };
+ #      };
+	# };
 	home.stateVersion = "25.05";
 	programs.bash = {
 		enable = true;
@@ -58,6 +74,8 @@ in
       yt-dlp
       fuzzel
       gcolor3
+      cmatrix
+      cbonsai
 	];
 # need more up to date packages
 # programs.satty = {

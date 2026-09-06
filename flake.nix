@@ -18,7 +18,7 @@
     noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -28,6 +28,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+						extraSpecialArgs = { inherit inputs; };
             users.magoa = import ./home/magoa/default.nix;
             backupFileExtension = "backup";
           };
