@@ -197,34 +197,43 @@ in
               name = "Toolbar";
               toolbar = true;
               bookmarks = [
-              { name = "FireMem";  url = "about:memory"; }
-              { name = "Desjardin"; url = "https://accweb.mouv.desjardins.com/identifiantunique/securite-garantie/authentification/auth/simple/0?domaineVirtuel=desjardins&langueCible=fr"; }
-              { name = "Google Chat";  url = "https://chat.google.com/app/home"; }
-              { name = "Google Meeting";  url = "https://meet.google.com/ids-ftpy-nab?pli=1"; }
-              { name = "Thailong";  url = "https://thailong.fliipapp.com/home/login"; }
+                { name = "FireMem";  url = "about:memory"; }
+                { name = "Desjardin"; url = "https://accweb.mouv.desjardins.com/identifiantunique/securite-garantie/authentification/auth/simple/0?domaineVirtuel=desjardins&langueCible=fr"; }
+                { name = "Google Chat";  url = "https://chat.google.com/app/home"; }
+                { name = "Google Meeting";  url = "https://meet.google.com/ids-ftpy-nab?pli=1"; }
+                { name = "Thailong";  url = "https://thailong.fliipapp.com/home/login"; }
 
 
-              {
-                name = "Dev";
-                bookmarks = [
-                { name = "NixOS";  url = "https://nixos.org"; }
-                { name = "GitHub"; url = "https://github.com"; }
-                { name = "Home Manager options"; url = "https://nix-community.github.io/home-manager/options.xhtml"; }
-                { name = "MyNixOS"; url = "https://mynixos.com"; }
-                ];
-              }
               ];
             }
 
             /* Bookmarks in the regular Bookmarks Menu (not on the toolbar) */
-            {
-              name = "Streaming";
-              bookmarks = [
-              { name = "YouTube"; url = "https://youtube.com"; }
-              { name = "Twitch Clemovitch";  url = "https://www.twitch.tv/clemovitch/schedule"; }
-              { name = "Twitch Nat_Ali";  url = "https://www.twitch.tv/nat_ali/schedule"; }
-              ];
-            }
+              {
+                name = "Streaming";
+                bookmarks = [
+                { name = "YouTube"; url = "https://youtube.com"; }
+                { name = "Twitch Clemovitch";  url = "https://www.twitch.tv/clemovitch/schedule"; }
+                { name = "Twitch Nat_Ali";  url = "https://www.twitch.tv/nat_ali/schedule"; }
+                ];
+              }
+              {
+                name = "Dev";
+                bookmarks = [
+                  { name = "NixOS";  url = "https://nixos.org"; }
+                  { name = "GitHub"; url = "https://github.com"; }
+                  { name = "Home Manager options"; url = "https://nix-community.github.io/home-manager/options.xhtml"; }
+                  { name = "MyNixOS"; url = "https://mynixos.com"; }
+                ];
+              }
+              {
+                name = "Rust";
+                bookmarks = [
+                  { name = "Utils";  url = "https://rustutils.com"; }
+                  { name = "Blog"; url = "https://blog.rust-lang.org"; }
+                  { name = "Home Manager options"; url = "https://nix-community.github.io/home-manager/options.xhtml"; }
+                  { name = "MyNixOS"; url = "https://mynixos.com"; }
+                ];
+              }
 
             /* A standalone bookmark with a keyword shortcut + tags */
             {

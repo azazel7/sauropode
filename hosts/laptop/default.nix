@@ -31,10 +31,14 @@
   
   nix.settings.auto-optimise-store = true;
 
-  # programs.noctalia-shell = {
-  #   enable = true;
-  #   systemd.enable = true;
-  # };
+  # Enable sound with PipeWire
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true; # Essential for pavucontrol
+    # jack.enable = true; # Optional, if you need JACK support
+  };
   programs.xwayland.enable = true;
   programs.niri.enable = true;
   services.displayManager.defaultSession = "niri";
@@ -60,7 +64,6 @@
       "audio" #for pulse audio
     ]; 
     packages = with pkgs; [
-      tree
     ];
     useDefaultShell = false; 
     
@@ -72,13 +75,20 @@
   programs.fish.enable = true;
 
   environment.systemPackages = with pkgs; [
+    bash
     neovim
     wget
     alacritty
     git
     light
+    vlc
+    pavucontrol
+    upower
+    brightnessctl
+    htop
   ];
 
+  nixpkgs.config.allowUnfree = true;
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];

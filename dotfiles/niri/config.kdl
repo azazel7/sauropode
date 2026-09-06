@@ -1,2 +1,261 @@
+// https://github.com/niri-wm/niri/blob/main/resources/default-config.kdl
 
+
+// This config is in the KDL format: https://kdl.dev
+// "/-" comments out the following node.
+// Check the wiki for a full description of the configuration:
+// https://niri-wm.github.io/niri/Configuration:-Introduction
+
+// Input device configuration.
+// Find the full list of options on the wiki:
+// https://niri-wm.github.io/niri/Configuration:-Input
+input {
+    keyboard {
+        xkb {
+            // You can set rules, model, layout, variant and options.
+            // For more information, see xkeyboard-config(7).
+            layout "fr(oss)"
+            options "ctrl:nocaps,ctrl:swap_lalt_lctl"
+
+            // If this section is empty, niri will fetch xkb settings
+            // from org.freedesktop.locale1. You can control these using
+            // localectl set-x11-keymap.
+        }
+        // Enable numlock on startup, omitting this setting disables it.
+        numlock
+    }
+    touchpad {
+        // off
+        tap
+        // dwt
+        // dwtp
+        // drag false
+        // drag-lock
+        natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "two-finger"
+        // disabled-on-external-mouse
+    }
+    mouse {
+        // off
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "no-scroll"
+    }
+}
+output "eDP-1" {
+    // Uncomment this line to disable this output.
+    // off
+
+    // Resolution and, optionally, refresh rate of the output.
+    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
+    // If the refresh rate is omitted, niri will pick the highest refresh rate
+    // for the resolution.
+    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
+    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
+    mode "1920x1080@59.997"
+
+    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
+    scale 2.3
+
+    // Transform allows to rotate the output counter-clockwise, valid values are:
+    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+    transform "normal"
+
+    // Position of the output in the global coordinate space.
+    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
+    // The cursor can only move between directly adjacent outputs.
+    // Output scale and rotation has to be taken into account for positioning:
+    // outputs are sized in logical, or scaled, pixels.
+    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
+    // so to put another output directly adjacent to it on the right, set its x to 1920.
+    // If the position is unset or results in an overlap, the output is instead placed
+    // automatically.
+    position x=0 y=0
+}
+// Settings that influence how windows are positioned and sized.
+// Find more information on the wiki:
+// https://niri-wm.github.io/niri/Configuration:-Layout
+layout {
+    // Set gaps around windows in logical pixels.
+    gaps 10
+
+    // When to center a column when changing focus, options are:
+    // - "never", default behavior, focusing an off-screen column will keep at the left
+    //   or right edge of the screen.
+    // - "always", the focused column will always be centered.
+    // - "on-overflow", focusing a column will center it if it doesn't fit
+    //   together with the previously focused column.
+    center-focused-column "never"
+
+    // You can customize the widths that "switch-preset-column-width" toggles between.
+    preset-column-widths {
+        // Proportion sets the width as a fraction of the output width, taking gaps into account.
+        // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
+        // The default preset widths are 1/3, 1/2 and 2/3 of the output.
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+
+        // Fixed sets the width in logical pixels exactly.
+        // fixed 1920
+    }
+
+    // You can also customize the heights that "switch-preset-window-height" (Mod+Ctrl+Shift+R) toggles between.
+    // preset-window-heights { }
+
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        width 2
+        // active-color "#aa0fd4"
+        // for active windows on other monitor
+        inactive-color "#505050"
+        active-gradient from="#bf2b0d" to="#c7ff7f" angle=45
+    }
+
+    // Struts shrink the area occupied by windows, similarly to layer-shell panels.
+    // You can think of them as a kind of outer gaps. They are set in logical pixels.
+    // Left and right struts will cause the next window to the side to always be visible.
+    // Top and bottom struts will simply add outer gaps in addition to the area occupied by
+    // layer-shell panels and regular gaps.
+    struts {
+        // left 64
+        // right 64
+        // top 64
+        // bottom 64
+    }
+}
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$|^Incrustation vidéo$"
+    match app-id=r#"gcolor3"# 
+    match app-id=r#"vlc"# 
+    open-floating true
+}
+// Example: enable rounded corners for all windows.
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+hotkey-overlay {
+    // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
+    skip-at-startup
+}
+prefer-no-csd
+
+// This line starts noctalia.
 spawn-at-startup "noctalia"
+screenshot-path "~/images/screenshot/%Y-%m-%d %H-%M-%S.png"
+// workspace "١"
+// workspace "۲"
+// workspace "۳"
+// workspace "۴"
+// workspace "۵"
+// workspace "۷"
+// workspace "۸"
+// workspace "۹"
+
+binds {
+    // https://github.com/niri-wm/niri/wiki/Configuration:-Key-Bindings
+
+    // shows a list of important hotkeys.
+    Mod+B { show-hotkey-overlay; }
+    Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "alacritty"; }
+    Mod+Shift+C hotkey-overlay-title="Close Window" repeat=false { close-window; }
+    Mod+N  hotkey-overlay-title="Open a Firefox" { spawn "firefox"; }
+    Mod+E  hotkey-overlay-title="Open a File Browser" { spawn-sh "alacritty -e ranger"; }
+    Mod+R  hotkey-overlay-title="Open Launcher" { spawn "fuzzel"; }
+
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+J              { focus-workspace-down; }
+    Mod+K              { focus-workspace-up; }
+    Mod+Shift+J cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Shift+K cooldown-ms=150 { move-column-to-workspace-up; }
+
+    // Usually scrolling up and down with Shift in applications results in
+    // horizontal scrolling; these binds replicate that.
+    Mod+L      { focus-column-right; }
+    Mod+H        { focus-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+H   { move-column-left; }
+
+    Mod+M { maximize-column; }
+    Mod+Shift+M { fullscreen-window; }
+
+    Mod+C { center-column; }
+    Mod+Shift+E { quit; }
+    // Mod+Shift+E { quit skip-confirmation=true; }
+
+
+    Mod+X  { consume-or-expel-window-left; }
+    Mod+V { consume-or-expel-window-right; }
+
+    // Move the focused window between the floating and the tiling layout.
+    Mod+F                 hotkey-overlay-title="Toggle Floating" { toggle-window-floating; }
+    Mod+Shift+F           hotkey-overlay-title="Focus on Floating Windows" { switch-focus-between-floating-and-tiling; }
+
+    Mod+Shift+parenright  hotkey-overlay-title="Decrease Window Width" { set-column-width "-10%"; }
+    Mod+Shift+Equal       hotkey-overlay-title="Increase Window Width" { set-column-width "+10%"; }
+    Mod+Shift+ccedilla    hotkey-overlay-title="Decrease Window Height" { set-window-height "-10%"; }
+    Mod+Shift+agrave      hotkey-overlay-title="Increase Window Height" { set-window-height "+10%"; }
+
+    // Toggle tabbed column display mode.
+    // Windows in this column will appear as vertical tabs,
+    // rather than stacked on top of each other.
+    Mod+W { switch-preset-column-width; }
+
+    // audio output control
+    Mod+F8               allow-when-locked=true hotkey-overlay-title="Decrease Audio Volume" { spawn-sh "pamixer-auto --decrease 4"; }
+    Mod+F9               allow-when-locked=true hotkey-overlay-title="Increase Audio Volume" { spawn-sh "pamixer-auto --increase 4"; }
+    Mod+F10              allow-when-locked=true hotkey-overlay-title="Toggle Mute"           { spawn-sh "pamixer-auto --toggle-mute"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "pamixer-auto --increase 4"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "pamixer-auto --decrease 4"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "pamixer-auto --toggle-mute"; }
+    // XF86AudioMicMute     allow-when-locked=true { spawn-sh ""; }
+
+    // MPD controls
+    Mod+Alt+N        hotkey-overlay-title="Next Song" allow-when-locked=true { spawn-sh "mpc next"; }
+    Mod+Alt+P        hotkey-overlay-title="Previous Song" allow-when-locked=true { spawn-sh "mpc prev"; }
+    Mod+Alt+Space    hotkey-overlay-title="Toggle Play/Pause" allow-when-locked=true { spawn-sh "mpc toggle"; }
+    Mod+Alt+X        hotkey-overlay-title="Remove Song" allow-when-locked=true { spawn-sh "mpc del 0"; }
+    XF86AudioPlay    allow-when-locked=true { spawn-sh "mpc toggle"; }
+    XF86AudioPause   allow-when-locked=true { spawn-sh "mpc pause"; }
+    XF86AudioStop    allow-when-locked=true { spawn-sh "mpc stop"; }
+    XF86AudioPrev    allow-when-locked=true { spawn-sh "mpc prev"; }
+    XF86AudioNext    allow-when-locked=true { spawn-sh "mpc next"; }
+
+    // Utility stuf
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+    Mod+Shift+W repeat=false { toggle-overview; }
+    Mod+Shift+A { power-off-monitors; }
+
+    Mod+Home { focus-column-first; }
+    Mod+End  { focus-column-last; }
+    Mod+Tab { focus-workspace-previous; }
+    Mod+Escape { focus-window-previous; }
+    Mod+D { focus-workspace 99 ; }
+    // Mod+X iconify/minimize
+    // Mod+D move to last workspace
+    // Mod+Escape switch with the last position
+}

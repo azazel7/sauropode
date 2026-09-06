@@ -9,6 +9,7 @@ configs = {
 	nvim = "nvim";
 	ranger = "ranger";
   niri = "niri";
+  fuzzel = "fuzzel";
 };
 in
 
@@ -22,6 +23,8 @@ in
 		../../modules/neovim.nix
 		../../modules/fish.nix
 		../../modules/firefox.nix
+		../../modules/pamixer.nix
+		# ../../modules/niri.nix
 	];
 	home.stateVersion = "25.05";
 	programs.bash = {
@@ -41,8 +44,31 @@ in
 			nixpkgs-fmt
 			nodejs
 			gcc
+      jaq
 			ranger
+      thunderbird
+      obsidian
+      satty /* --- for screenshot */
+      pamixer
+      avidemux
+      thunderbird
+      qtpass
+      evince
+      blueberry
+      yt-dlp
+      fuzzel
+      gcolor3
 	];
+# need more up to date packages
+# programs.satty = {
+#   enable = true;
+#   settings = {
+#     general = {
+#       fullscreen = false;
+#       initial-tool = "brush";
+#     };
+#   };
+# };
 # Iterate over xdg configs and map them accordingly
 	xdg.configFile = builtins.mapAttrs (name: subpath: {
 			source = create_symlink "${dotfiles}/${subpath}";
