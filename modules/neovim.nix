@@ -25,6 +25,7 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+		extraLuaConfig = lib.mkForce ""; 
 
     # optional: If you want to manage your plugins with nix, instead of with lazy.nvim,
     # you can do it with the plugins key.

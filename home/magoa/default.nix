@@ -5,7 +5,6 @@ dotfiles = "${config.home.homeDirectory}/sauropode/dotfiles";
 create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 # Standard .config/directory
 configs = {
-	qtile = "qtile";
 	nvim = "nvim";
 	ranger = "ranger";
   niri = "niri";
@@ -42,18 +41,23 @@ in
  #        # };
  #      };
 	# };
-	home.stateVersion = "25.05";
+	home.stateVersion = "26.05";
 	programs.bash = {
 		enable = true;
 		shellAliases = {
-			btw = "echo i use nixos, btw";
+			ll = "ls -lah";
 		};
 	};
 	programs.git = {
 		enable = true;
-		userName = "Martin";
-		userEmail = "martin@example.com";
+		settings = {
+			user = {
+				name = "Martin";
+				email = "martin@example.com";
+			};
+		};
 	};
+
 	home.packages = with pkgs; [
 			ripgrep
 			nil
@@ -70,7 +74,7 @@ in
       thunderbird
       qtpass
       evince
-      blueberry
+      blueman
       yt-dlp
       fuzzel
       gcolor3

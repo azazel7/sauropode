@@ -46,11 +46,6 @@
     enable = true;
     autoRepeatDelay = 300;
     autoRepeatInterval = 35;
-    windowManager.qtile.enable = true;
-    xkb = {
-      layout = "fr";
-      variant = "";
-    };
   };
 
   services.openssh.enable = true;
@@ -80,7 +75,6 @@
     wget
     alacritty
     git
-    light
     vlc
     pavucontrol
     upower
@@ -94,7 +88,7 @@
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 
   # For fish. CRITICAL FOR FLAKES: Disable the standard channel-based command-not-found handler
   programs.command-not-found.enable = false;
