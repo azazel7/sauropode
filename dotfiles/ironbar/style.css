@@ -63,8 +63,8 @@ switch:not(:checked) {
     background-color: var(--color-dark-primary);
 }
 #bar {
-    border-radius: 12px;       /* Arrondit les 4 coins */
-    margin: 6px 16px 0px 16px;     /* Crée le gap (Haut, Droite, Bas, Gauche) */
+    border-radius: 12px;    
+    margin: 6pt 16pt 0px 16pt;
 }
 
 window {
