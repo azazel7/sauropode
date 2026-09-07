@@ -89,7 +89,12 @@ in
   nix.settings.auto-optimise-store = true;
 
 
-  #networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [ 
+    /* SSH */
+    22
+    /* python http */
+    8000
+  ];
 
   users.users.magoa = {
     isNormalUser = true;
