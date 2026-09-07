@@ -60,8 +60,8 @@
       mountiso = "mount -o loop -t iso9660";
       yt-dlp-mp3 = "yt-dlp -x --audio-format mp3 --audio-quality 320K --no-playlist";
       redshift = "nohup redshift -l 45.53:-73.59 -t 7000:2200";
-      poweroff = "mpd --kill; poweroff";
-      reboot = "mpd --kill; reboot";
+      poweroff = "systemctl poweroff";
+      reboot = "systemctl reboot";
       find = "fd";
       jo = "_zoxide_and_open";
     };
