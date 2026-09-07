@@ -1,0 +1,215 @@
+:root {
+    --color-dark-primary: #1c1c1c;
+    --color-dark-secondary: #2d2d2d;
+    --color-white: #fbeac7;
+    --color-active: #66bbcc;
+    --color-urgent: #8f0a0a;
+
+    --color-text: #fbeac7;
+    --color-darkertext: #ebdab7;
+    --color-wspace-inactive: #c8c8c8;
+    --color-wspace: #f8f8f8;
+    --color-clock: #e0e0e0;
+    --color-mail: #fbba97;
+    --color-clipboard: #b8b8f8;
+    --color-notifymsg: #60f060;
+    --color-power: #b2d2eb;
+    --color-music: #fbeac7;
+    --color-volume: #904b28;
+
+    --margin-lg: 1.8em;
+    --margin-sm: 0.5em;
+}
+
+* {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+    font-family: monospace;
+    font-family: JetBrainsMonoNerdFont, Font Awesome;
+    font-size: .999em;
+    font-weight: 600;
+}
+
+scale > trough {
+    background-color: var(--color-dark-secondary);
+}
+
+scale > trough > highlight {
+    background-color: var(--color-active);
+    border-style: solid;
+    border-color: var(--color-active);
+    border-width: 0.2em;
+}
+
+scale > trough > slider {
+    background-color: var(--color-white);
+}
+
+switch > slider {
+    background-color: var(--color-white);
+}
+
+switch:checked {
+    background-color: var(--color-active);
+}
+
+switch:not(:checked) {
+  background-color: var(--color-dark-secondary);
+}
+
+#bar, popover, popover contents, calendar {
+    background-color: var(--color-dark-primary);
+}
+#bar {
+    border-radius: 12px;       /* Arrondit les 4 coins */
+    margin: 6px 16px 0px 16px;     /* Crée le gap (Haut, Droite, Bas, Gauche) */
+}
+
+window {
+    background-color: transparent;
+    background-image: none;
+}
+
+box, button, label {
+    background-color: #0000;
+    color: var(--color-white);
+}
+
+button {
+    padding-left: var(--margin-sm);
+    padding-right: var(--margin-sm);
+}
+
+button:hover, button:active {
+    background-color: var(--color-dark-secondary);
+}
+
+#end > * + * {
+    margin-left: var(--margin-lg);
+}
+
+#start > * + * {
+    margin-left: var(--margin-sm);
+}
+
+.sysinfo > * + * {
+    margin-left: var(--margin-sm);
+}
+
+#clock {
+    font-weight: bold;
+}
+
+.popup-clock .calendar-clock {
+    font-size: 2.0em;
+}
+
+.popup-clock .calendar .today {
+    background-color: var(--color-active);
+}
+
+.workspaces .item.visible {
+    box-shadow: inset 0 -1px var(--color-white);
+}
+
+.workspaces .item.focused {
+    box-shadow: inset 0 -2px var(--color-active);
+    background-color: var(--color-dark-secondary);
+    border-radius: 6px;       /* Arrondit les 4 coins */
+}
+
+.workspaces .item label {
+    color: var(--color-wspace-inactive);
+}
+
+.workspaces .item.focused label {
+    color: var(--color-wspace);
+}
+
+.workspaces .item.urgent {
+    background-color: var(--color-urgent);
+}
+
+.workspaces {
+    padding-left: 1em;
+    padding-right: .4em;
+}
+
+.workspaces label {
+    font-family: ComicShannsMonoNerdFont, Font Awesome;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.workspaces .item.focused label {
+    font-size: 1.1em;
+}
+
+.focused .icon {
+    padding-right: .5em;
+}
+
+.focused .label {
+    color: var(--color-darkertext);
+}
+
+.notifications {
+    padding-right: .6em;
+}
+
+.music {
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.music label {
+  color: var(--color-music);
+}
+
+#power {
+  color: var(--color-power);
+}
+
+.popup-music label {
+  font-size: 1.1em;
+  color: var(--color-white);
+}
+
+.volume {
+    box-shadow: inset 0 -1.5px var(--color-volume);
+}
+
+.volume .sink,
+.volume .source {
+    letter-spacing: .05em;
+}
+
+.clock {
+    padding-right: .8em;
+}
+
+.clock label {
+    font-family: ComicShannsMonoNerdFont, Font Awesome;
+    font-size: 1.08em;
+    color: var(--color-clock);
+}
+
+#mail {
+    color: var(--color-mail);
+}
+
+.notifications .count {
+    color: var(--color-notifymsg);
+    font-size: .85em;
+}
+
+.clipboard {
+    padding-left: 0;
+    padding-right: 1em;
+}
+
+.clipboard label {
+    color: var(--color-clipboard);
+}
