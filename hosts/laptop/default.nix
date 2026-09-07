@@ -1,5 +1,36 @@
 { config, lib, pkgs, inputs, ... }:
 
+let
+  mountUid = toString config.users.users.magoa.uid;
+  mountGid = "100";  # NixOS's "users" group
+
+  autoMounts = [
+    { mountpoint = "/mnt/teapot";    uuid = "003B-3D17"; fsType = "exfat"; }
+    { mountpoint = "/mnt/coffeepot"; uuid = "67E3-17ED"; fsType = "vfat";  }
+    { mountpoint = "/mnt/usb"; uuid = "57F6-B30A"; fsType = "vfat";  }
+    { mountpoint = "/mnt/plain-hardrive"; uuid = "577E-0F94"; fsType = "vfat";  }
+    { mountpoint = "/mnt/rorqual"; uuid = "7d3796a2-6570-47c7-a5cf-0d3e33cefc37"; fsType = "ext4";  }
+    { mountpoint = "/mnt/loutre"; uuid = "acd63365-8604-4409-9339-11dd00e159bd"; fsType = "ext4";  }
+    { mountpoint = "/mnt/ebook"; uuid = "564A-6EB5"; fsType = "vfat";  }
+  ];
+
+  mkAutoMount = { mountpoint, uuid, fsType }: {
+    name = mountpoint;
+    value = {
+      device = "/dev/disk/by-uuid/${uuid}";
+      inherit fsType;
+      options = [
+        "nofail"
+        "x-systemd.automount"
+        "x-systemd.device-timeout=1ms"
+        "uid=${mountUid}"
+        "gid=${mountGid}"
+        "umask=0177"
+        "dmask=077"
+      ];
+    };
+  };
+in
 {
   imports =
     [
@@ -11,23 +42,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  fileSystems."/mnt/teapot" = {
-    device = "/dev/disk/by-uuid/003B-3D17";  # find with `lsblk -f` or `blkid`
-    fsType = "exfat";
-    options = [
-      "nofail"                        # don't block boot if drive is unplugged
-      "x-systemd.automount"           # mount on first access, not at boot
-    ];
-  };
-  fileSystems."/mnt/coffeepot" = {
-    device = "/dev/disk/by-uuid/67E3-17ED";  # find with `lsblk -f` or `blkid`
-    fsType = "fat32";
-    options = [
-      "nofail"                        # don't block boot if drive is unplugged
-      "x-systemd.automount"           # mount on first access, not at boot
-    ];
-  };
-
+  fileSystems = builtins.listToAttrs (map mkAutoMount autoMounts);
   networking.hostName = "nixos";
 
   time.timeZone = "America/Toronto";
@@ -78,6 +93,7 @@
 
   users.users.magoa = {
     isNormalUser = true;
+    uid = 1000;
     extraGroups = [ 
       "wheel" # Keep wheel for root access
       "audio" #for pulse audio
