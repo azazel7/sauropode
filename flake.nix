@@ -13,9 +13,6 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
-    /* Noctalia shell (Wayland desktop shell + launcher) */
-    # noctalia.url = "github:noctalia-dev/noctalia-shell";
-    # noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
