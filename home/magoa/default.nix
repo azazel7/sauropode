@@ -9,6 +9,7 @@ let
     ranger = "ranger";
     niri = "niri";
     fuzzel = "fuzzel";
+    ironbar = "ironbar";
   };
 in
 
@@ -23,7 +24,7 @@ in
 		../../modules/fish.nix
 		../../modules/firefox.nix
 		../../modules/pamixer.nix
-    # inputs.noctalia.homeManagerModules.default
+    # inputs.noctalia.homeModules.default
 	];
 	# programs.noctalia = {
  #      enable = true;
@@ -45,7 +46,7 @@ in
 	programs.bash = {
 		enable = true;
 		shellAliases = {
-			ll = "ls -lah";
+			ll = "lsd -lah";
 		};
 	};
 	programs.git = {
@@ -65,6 +66,7 @@ in
 			nodejs
 			gcc
       jaq
+      lsd /* better ls */
 			ranger
       thunderbird
       obsidian
