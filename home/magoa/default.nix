@@ -1,15 +1,15 @@
 { config, pkgs, inputs, ... }:
 
 let
-dotfiles = "${config.home.homeDirectory}/sauropode/dotfiles";
-create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-# Standard .config/directory
-configs = {
-	nvim = "nvim";
-	ranger = "ranger";
-  niri = "niri";
-  fuzzel = "fuzzel";
-};
+  dotfiles = "${config.home.homeDirectory}/sauropode/dotfiles";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  # Standard .config/directory
+  configs = {
+    nvim = "nvim";
+    ranger = "ranger";
+    niri = "niri";
+    fuzzel = "fuzzel";
+  };
 in
 
 
