@@ -88,6 +88,7 @@ in
       transmission_4-gtk
       mpd
       ncmpcpp
+      timer
       python3
 	];
   services.mpd = {
