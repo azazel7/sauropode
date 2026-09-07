@@ -150,7 +150,8 @@ hotkey-overlay {
 prefer-no-csd
 
 // This line starts noctalia.
-spawn-at-startup "noctalia"
+// spawn-at-startup "noctalia"
+spawn-at-startup "ironbar"
 screenshot-path "~/images/screenshot/%Y-%m-%d %H-%M-%S.png"
 // workspace "١"
 // workspace "۲"
@@ -260,6 +261,8 @@ binds {
     Mod+Tab { focus-workspace-previous; }
     Mod+Escape { focus-window-previous; }
     Mod+D { focus-workspace 99 ; }
+
+    Mod+Shift+R { spawn-sh "pkill ironbar; ironbar"; }
     // Mod+X iconify/minimize
     // Mod+D move to last workspace
     // Mod+Escape switch with the last position
