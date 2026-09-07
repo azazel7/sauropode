@@ -11,6 +11,7 @@ let
     fuzzel = "fuzzel";
     ironbar = "ironbar";
     ncmpcpp = "ncmpcpp";
+    vlc = "vlc";
   };
 in
 
