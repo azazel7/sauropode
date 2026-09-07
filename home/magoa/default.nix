@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, services, inputs, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/sauropode/dotfiles";
@@ -10,6 +10,7 @@ let
     niri = "niri";
     fuzzel = "fuzzel";
     ironbar = "ironbar";
+    ncmpcpp = "ncmpcpp";
   };
 in
 
@@ -82,7 +83,21 @@ in
       gcolor3
       cmatrix
       cbonsai
+      sshfs
+      transmission_4-gtk
+      mpd
+      ncmpcpp
 	];
+  services.mpd = {
+    enable = true;
+    musicDirectory = "${config.home.homeDirectory}/music";
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "PipeWire Output"
+      }
+    '';
+  };
 # need more up to date packages
 # programs.satty = {
 #   enable = true;

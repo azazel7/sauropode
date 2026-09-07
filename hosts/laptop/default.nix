@@ -7,8 +7,26 @@
     ];
 
 
+  boot.supportedFilesystems = [ "ntfs" "exfat" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  fileSystems."/mnt/teapot" = {
+    device = "/dev/disk/by-uuid/003B-3D17";  # find with `lsblk -f` or `blkid`
+    fsType = "exfat";
+    options = [
+      "nofail"                        # don't block boot if drive is unplugged
+      "x-systemd.automount"           # mount on first access, not at boot
+    ];
+  };
+  fileSystems."/mnt/coffeepot" = {
+    device = "/dev/disk/by-uuid/67E3-17ED";  # find with `lsblk -f` or `blkid`
+    fsType = "fat32";
+    options = [
+      "nofail"                        # don't block boot if drive is unplugged
+      "x-systemd.automount"           # mount on first access, not at boot
+    ];
+  };
 
   networking.hostName = "nixos";
 
