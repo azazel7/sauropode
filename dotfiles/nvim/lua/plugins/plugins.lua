@@ -55,45 +55,46 @@ local plugins = {
     end
 
   },
-
   {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
     config = function()
-      -- require("nvchad.configs.lspconfig").defaults()
-      -- require("lspconfig").defaults()
       local on_attach = require("nvchad.configs.lspconfig").on_attach
       local on_init = require("nvchad.configs.lspconfig").on_init
       local capabilities = require("nvchad.configs.lspconfig").capabilities
+      local lspconfig = require "lspconfig" -- still needed for util.root_pattern
 
-      local lspconfig = require "lspconfig"
       local servers = { "html", "cssls" }
 
       -- lsps with default config
       for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup {
+        vim.lsp.config(lsp, {
           on_attach = on_attach,
           on_init = on_init,
           capabilities = capabilities,
-        }
+        })
       end
 
       -- Rust
-      lspconfig.rust_analyzer.setup({
+      vim.lsp.config("rust_analyzer", {
         on_attach = on_attach,
         on_init = on_init,
         capabilities = capabilities,
-        filetypes = {"rust"},
+        filetypes = { "rust" },
         root_dir = lspconfig.util.root_pattern("Cargo.toml"),
       })
+
       -- C++
-      lspconfig.clangd.setup({
+      vim.lsp.config("clangd", {
         on_attach = function(client, bufnr)
           client.server_capabilities.signatureHelpProvider = false
           on_attach(client, bufnr)
         end,
         capabilities = capabilities,
       })
+
+      -- Enable all configured servers
+      vim.lsp.enable({ "html", "cssls", "rust_analyzer", "clangd" })
     end,
   },
   -- { --FIXME rust-tools fucks up the color in Rust files :-/.
@@ -126,6 +127,18 @@ local plugins = {
       vim.g.table_mode_corner_corner='+'
       vim.g.table_mode_header_fillchar='-'
     end
+  },
+  {
+    'numToStr/Comment.nvim',
+    keys = { "<F6>", { "<F6>", mode = "v" } },
+    opts = {
+        toggler = {
+          ---Line-comment toggle keymap
+          line = 'F6',
+          ---Block-comment toggle keymap
+          block = 'gbc',
+      },
+    },
   }
 }
 return plugins

@@ -46,9 +46,7 @@ map("n", "<leader>x", function()
 end, { desc = "buffer close" })
 
 -- Comment
-map("n", "<F6>", function()
-  require("Comment.api").toggle.linewise.current()
-end, { desc = "comment toggle" })
+map("n", "<F6>", "gcc", { desc = "comment toggle" })
 
 map(
   "v",
