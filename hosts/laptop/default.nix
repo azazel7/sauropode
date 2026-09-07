@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -6,22 +6,46 @@
       ./hardware.nix
     ];
 
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
 
   time.timeZone = "America/Toronto";
 
   console.keyMap = "fr";
 
-
   # For battery saving
   services.tlp.enable = true;
   # for intel CPU to avoid over heating
   services.thermald.enable = true;
+  # The login manager on the machine
   services.displayManager.ly.enable = true;
+  # For wifi and networking
+  networking.networkmanager.enable = true;
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
+  # For checking power and battery
+  services.upower.enable = true;
+  # Enable SSH
+  services.openssh.enable = true;
+  # Enable sound with PipeWire
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true; # Essential for pavucontrol
+    # jack.enable = true; # Optional, if you need JACK support
+  };
+  # Enable Graphical server
+  services.xserver = {
+    enable = true;
+    autoRepeatDelay = 300;
+    autoRepeatInterval = 35;
+  };
+  # Set niri as the default compositor
+  services.displayManager.defaultSession = "niri";
 
   nix.gc = {
     automatic = true;
@@ -31,26 +55,8 @@
   
   nix.settings.auto-optimise-store = true;
 
-  # Enable sound with PipeWire
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true; # Essential for pavucontrol
-    # jack.enable = true; # Optional, if you need JACK support
-  };
-  programs.xwayland.enable = true;
-  programs.niri.enable = true;
-  services.displayManager.defaultSession = "niri";
-  services.xserver = {
-    enable = true;
-    autoRepeatDelay = 300;
-    autoRepeatInterval = 35;
-  };
 
-  services.openssh.enable = true;
   #networking.firewall.allowedTCPPorts = [ 22 ];
-
 
   users.users.magoa = {
     isNormalUser = true;
@@ -66,9 +72,7 @@
     shell = pkgs.fish;
   };
 
-
-  programs.fish.enable = true;
-
+  # Define system wide packages
   environment.systemPackages = with pkgs; [
     bash
     neovim
@@ -77,9 +81,11 @@
     git
     vlc
     pavucontrol
-    upower
     brightnessctl
+    ironbar
     htop
+    btop
+    ncdu
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -90,6 +96,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "26.05";
 
+  # Need to be enable before defining fish for users
+  programs.fish.enable = true;
   # For fish. CRITICAL FOR FLAKES: Disable the standard channel-based command-not-found handler
   programs.command-not-found.enable = false;
+  programs.xwayland.enable = true;
+  programs.niri.enable = true;
 }
