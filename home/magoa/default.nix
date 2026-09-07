@@ -103,19 +103,48 @@ in
       }
     '';
   };
-  /* start deamon service */
-  services.mako = {
+    services.mako = {
       enable = true;
       settings = {
-        background-color = "#1e1e2e";
-        text-color = "#cdd6f4";
-        border-color = "#aaaaaa";
+        # --- Base look ---
+        background-color = "#1e1e2eee";   # Catppuccin Mocha "base", slight transparency
+        text-color = "#cdd6f4";           # Mocha "text"
+        border-color = "#89b4fa";         # Mocha "blue" — subtler than plain gray
         border-size = 2;
-        border-radius = 5;
+        border-radius = 12;
+        padding = "12,16";                # top/bottom, left/right
+        margin = "12";
+        width = 380;
+        height = 120;
         font = "JetBrains Mono 10";
-        default-timeout = 5000; # millseconds
+
+        # --- Layout / positioning ---
+        anchor = "top-right";
+        layer = "overlay";
+        sort = "-time";
+        max-visible = 5;
+        group-by = "app-name";
+
+        # --- Icons ---
+        icons = true;
+        max-icon-size = 48;
+        icon-path = "/run/current-system/sw/share/icons/hicolor";
+
+        # --- Timing ---
+        default-timeout = 5000;
+        ignore-timeout = false;
+
+        # --- Progress bar (volume/brightness OSD notifications) ---
+        progress-color = "over #89b4fa";
+
+        # --- Interaction ---
+        on-button-left = "dismiss";
+        on-button-middle = "dismiss-all";
+        on-button-right = "dismiss-group";
+        on-touch = "dismiss";
       };
-    };
+  };
+
 # need more up to date packages
 # programs.satty = {
 #   enable = true;
