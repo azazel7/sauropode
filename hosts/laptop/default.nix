@@ -126,6 +126,8 @@ in
     htop
     btop
     ncdu
+    sunsetr
+    libnotify # for desktop notification
   ];
 
   nixpkgs.config.allowUnfree = true;

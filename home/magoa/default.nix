@@ -91,6 +91,7 @@ in
       mpc
       timer
       python3
+      mako
 	];
   services.mpd = {
     enable = true;
@@ -102,6 +103,19 @@ in
       }
     '';
   };
+  /* start deamon service */
+  services.mako = {
+      enable = true;
+      settings = {
+        background-color = "#1e1e2e";
+        text-color = "#cdd6f4";
+        border-color = "#aaaaaa";
+        border-size = 2;
+        border-radius = 5;
+        font = "JetBrains Mono 10";
+        default-timeout = 5000; # millseconds
+      };
+    };
 # need more up to date packages
 # programs.satty = {
 #   enable = true;
