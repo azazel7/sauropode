@@ -92,6 +92,7 @@
 
   # Define system wide packages
   environment.systemPackages = with pkgs; [
+    veracrypt
     bash
     neovim
     wget
