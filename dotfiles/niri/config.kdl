@@ -149,8 +149,6 @@ hotkey-overlay {
 }
 prefer-no-csd
 
-// This line starts noctalia.
-// spawn-at-startup "noctalia"
 spawn-at-startup "ironbar"
 screenshot-path "~/images/screenshot/%Y-%m-%d %H-%M-%S.png"
 // workspace "١"
