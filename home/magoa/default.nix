@@ -88,6 +88,7 @@ in
       transmission_4-gtk
       mpd
       ncmpcpp
+      python3
 	];
   services.mpd = {
     enable = true;
