@@ -149,6 +149,7 @@ hotkey-overlay {
 }
 prefer-no-csd
 
+spawn-sh-at-startup "sunsetr-auto"
 spawn-at-startup "ironbar"
 screenshot-path "~/images/screenshot/%Y-%m-%d %H-%M-%S.png"
 // workspace "١"

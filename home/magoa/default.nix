@@ -12,6 +12,7 @@ let
     ironbar = "ironbar";
     ncmpcpp = "ncmpcpp";
     vlc = "vlc";
+    sunsetr = "sunsetr";
   };
 in
 
@@ -26,6 +27,7 @@ in
 		../../modules/fish.nix
 		../../modules/firefox.nix
 		../../modules/pamixer.nix
+		../../modules/sunsetr.nix
     # inputs.noctalia.homeModules.default
 	];
 	# programs.noctalia = {
