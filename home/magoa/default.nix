@@ -13,6 +13,7 @@ let
     ncmpcpp = "ncmpcpp";
     vlc = "vlc";
     sunsetr = "sunsetr";
+    rmpc = "rmpc";
   };
 in
 
