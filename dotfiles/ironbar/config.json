@@ -1,15 +1,184 @@
 {
-  "position": "top",
-  "width": 48,
-  "start": [
-    { "type": "workspaces", "all_monitors": true }
-  ],
-  "center": [
-    { "type": "focused", "show_icon": true, "show_title": false, "icon_size": 24 }
-  ],
-  "end": [
-    { "type": "volume", "format": "{volume}%" },
-    { "type": "sys_info", "format": ["{memory_percent}%"], "interval": { "memory": 5 } },
-    { "type": "clock", "format": "%a\n%d/%m" }
-  ]
+	"position": "top",
+	"width": 48,
+	"height": 48,
+	"name": "otter",
+	"start": [
+		{ 
+			"type": "workspaces", 
+      "name_map": {
+        "1": "١",
+        "2": "۲",
+        "3": "۳",
+        "4": "۴",
+        "5": "۵",
+        "6": "۶",
+        "7": "۷",
+        "8": "۸",
+        "9": "۹"
+      },
+			"all_monitors": false
+		}
+	],
+	"center": [
+		{
+      "type": "music",
+      "player_type": "mpd",
+      "format": "{title} / {artist}",
+      "truncate": "end",
+      "icons": {
+        "play": "",
+        "pause": ""
+      },
+      "music_dir": "~/music"
+    }
+	],
+	"end": [
+		{
+			"type": "custom",
+			"name": "volume",
+			"on_click_left" : "pavucontrol",
+			"on_scroll_up": "pamixer-auto --increase 4",
+      "on_scroll_down": "pamixer-auto --decrease 4",
+			"bar": [
+				{
+					"type": "label",
+					"label": "🔊"
+				},
+				{
+					"type": "cairo",
+					"path": ".config/ironbar/scripts/volume_graph.lua",
+					"frequency": 500,
+					"width": 26,
+					"height": 26
+				}
+			]
+		},
+		{
+			"type": "custom",
+			"name": "brightness",
+			"on_scroll_up": "brightnessctl set +2%",
+      "on_scroll_down": "brightnessctl set 2%-",
+
+			"bar": [
+				{
+					"type": "label",
+					"label": "🌗"
+				},
+				{
+					"type": "cairo",
+					"path": ".config/ironbar/scripts/brightness_graph.lua",
+					"frequency": 500,
+					"width": 26,
+					"height": 26
+				}
+			]
+		},
+		{
+			"type": "custom",
+			"name": "redshift",
+			"on_click_left" : "$XDG_CONFIG_HOME/ironbar/scripts/redshift_toggle.sh",
+			"bar": [
+				{
+          "type": "image",
+          "src": "file:///home/magoa/.config/ironbar/assets/light_dark.svg",
+          "size": 10
+        },
+				{
+					"type": "cairo",
+					"path": ".config/ironbar/scripts/redshift_graph.lua",
+					"frequency": 500,
+					"width": 26,
+					"height": 26
+				}
+			]
+		},
+		{
+			"type": "custom",
+			"name": "ram",
+      "on_mouse_enter": "ironbar var set memory_state true",
+      "on_mouse_exit": "ironbar var set memory_state false",
+			"bar": [
+				{
+          "type": "image",
+          "src": "file:///home/magoa/.config/ironbar/assets/memory_dark.svg",
+          "size": 10
+        },
+        { 
+          "type": "sys_info", 
+          "format": [" {memory_percent}% "],
+          "show_if": "#memory_state",
+          "interval": { 
+            "memory": 5
+          }
+        },
+				{
+					"type": "cairo",
+					"path": ".config/ironbar/scripts/ram_graph.lua",
+					"frequency": 500,
+					"width": 26,
+					"height": 26
+				}
+			]
+		},
+		{
+			"type": "custom",
+		  "name": "battery",
+			"bar": [
+				{
+					"type": "label",
+					"label": "🔋"
+				},
+				{
+					"type": "cairo",
+					"path": ".config/ironbar/scripts/battery_graph.lua",
+					"frequency": 5000,
+					"width": 26,
+					"height": 26
+				}
+			]
+		},
+		{
+			"type": "custom",
+			"name": "ram",
+      "on_mouse_enter": "ironbar var set cpu_temp_state true",
+      "on_mouse_exit": "ironbar var set cpu_temp_state false",
+			"bar": [
+				{
+					"type": "label",
+					"label": "🔥"
+        },
+        { 
+          "type": "script",
+          "cmd": "cat /sys/class/thermal/thermal_zone*/temp | awk '{sum+=$1; count++} END {if (count>0) print sum/count/1000}'",
+          "mode": "poll",
+          "show_if": "#cpu_temp_state",
+          "interval": 2000
+        },
+				{
+					"type": "cairo",
+					"path": ".config/ironbar/scripts/cpu_temp_graph.lua",
+					"frequency": 500,
+					"width": 26,
+					"height": 26
+				}
+			]
+		},
+		{
+      "type": "clock",
+      "format": "%d/%m/%Y",
+      "show_if": "#clock_state"
+    },
+    {
+      "type": "clock",
+      "format": "%H:%M",
+      "on_mouse_enter": "ironbar var set clock_state true",
+      "on_mouse_exit": "ironbar var set clock_state false"
+    },
+    {
+  "type": "tray",
+  "on_click_left": "menu",
+  "on_click_left_double": "default"
+}
+	]
 }

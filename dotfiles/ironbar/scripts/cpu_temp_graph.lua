@@ -1,31 +1,51 @@
+-- Thickness of Circle
+
 local circle = 4
+
+-- Temperature range for the fraction mapping (in °C)
+local temp_min = 32
+local temp_max = 55
+
+local function get_cpu_temp_cmd()
+  return "cat /sys/class/thermal/thermal_zone*/temp | awk '{sum+=$1; count++} END {if (count>0) print sum/count/1000}'"
+end
+
+local function get_cpu_temp_fraction()
+  local handle = io.popen(get_cpu_temp_cmd())
+  local temp = tonumber(handle:read("*a"))
+  handle:close()
+  if not temp then return nil end
+
+  local fraction = (temp - temp_min) / (temp_max - temp_min)
+  fraction = math.max(0, math.min(1, fraction))
+  return fraction
+end
+
 
 ----------------
 -- RGB Function
 ----------------
-
+-- Green (0.0, 0.8, 0.0) -> Orange (1.0, 0.5, 0.0) -> Red (1.0, 0.0, 0.0)
 local function get_rgb(fraction_used)
   local r, g, b = 0.0, 0.0, 0.0
+
   if fraction_used < 0.5 then
-    g = fraction_used * 2.0
-    r = 1.0
+    -- Green to Orange
+    local t = fraction_used * 2.0
+    r = t * 1.0
+    g = 0.8 + t * (0.5 - 0.8)
+    b = 0.0
   else
-    g = 1.0
-    r = 2.0 * (1.0 - fraction_used)
+    -- Orange to Red
+    local t = (fraction_used - 0.5) * 2.0
+    r = 1.0
+    g = 0.5 + t * (0.0 - 0.5)
+    b = 0.0
   end
+
   return r, g, b
 end
 
--------------------
--- Battery Function
--------------------
-
-local function get_battery_percentage()
-  local handle = io.popen("upower -i $(upower -e | grep 'BAT') | grep -oP 'percentage:\\s*\\K[0-9]+'")
-  local result = handle:read("*a")
-  handle:close()
-  return tonumber(result) or 0
-end
 
 -----------
 -- Program
@@ -36,9 +56,8 @@ local function render(cr, width, height)
   cr:paint()
   cr:set_operator(2)
 
-	local battery_used = get_battery_percentage()
-  local fraction_used = math.max(0, battery_used / 100)
-  if fraction_used == 0 then return end
+  local fraction_used = get_cpu_temp_fraction()
+  if not fraction_used then return end
 
   local r, g, b = get_rgb(fraction_used)
 
@@ -50,6 +69,7 @@ local function render(cr, width, height)
   local total_span = (2 * math.pi) - (start_angle - end_angle)
 
   cr:set_line_width(circle)
+
   cr:set_line_cap(1)
   cr:set_source_rgba(0.19, 0.19, 0.19, 1.0)
   cr:arc(xc, yc, radius, start_angle, end_angle)
@@ -65,3 +85,4 @@ local function render(cr, width, height)
 end
 
 return render
+

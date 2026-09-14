@@ -113,6 +113,7 @@ in
 
   # Define system wide packages
   environment.systemPackages = with pkgs; [
+		psmisc # contains killall
     veracrypt
     bash
     neovim
@@ -128,8 +129,14 @@ in
     ncdu
     sunsetr
     libnotify # for desktop notification
+		lua
+		pkgs.lua51Packages.lgi
+		cairo # for drawing in lua for Ironbar
+    nm-applet
   ];
-
+	environment.variables = {
+		GI_TYPELIB_PATH = "${pkgs.upower}/lib/girepository-1.0";
+	};
   nixpkgs.config.allowUnfree = true;
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

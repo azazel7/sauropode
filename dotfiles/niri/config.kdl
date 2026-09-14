@@ -154,17 +154,9 @@ hotkey-overlay {
 }
 prefer-no-csd
 
-spawn-sh-at-startup "sunsetr-auto"
+spawn-sh-at-startup "sunsetr --background"
 spawn-at-startup "ironbar"
 screenshot-path "~/images/screenshot/%Y-%m-%d %H-%M-%S.png"
-// workspace "١"
-// workspace "۲"
-// workspace "۳"
-// workspace "۴"
-// workspace "۵"
-// workspace "۷"
-// workspace "۸"
-// workspace "۹"
 
 binds {
     // https://github.com/niri-wm/niri/wiki/Configuration:-Key-Bindings
@@ -266,7 +258,7 @@ binds {
     Mod+Escape { focus-window-previous; }
     Mod+D { focus-workspace 99 ; }
 
-    Mod+Shift+R { spawn-sh "pkill ironbar; ironbar"; }
+    Mod+Shift+R { spawn-sh "ironbar reload"; }
     // Mod+X iconify/minimize
     // Mod+D move to last workspace
     // Mod+Escape switch with the last position

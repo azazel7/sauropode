@@ -1,30 +1,31 @@
+-- Thickness of Circle
 local circle = 4
+
+local function pamixer_cmd(args)
+  return 'pamixer-auto ' .. args
+end
+
+local function get_volume()
+	local handle = io.popen(pamixer_cmd("--get-volume"))
+	local volume = tonumber(handle:read("*a")) or 0
+  handle:close()
+  return volume / 100
+end
 
 ----------------
 -- RGB Function
 ----------------
 
 local function get_rgb(fraction_used)
-  local r, g, b = 0.0, 0.0, 0.0
+  local r, g, b = 0.0, 0.6, 0.0
   if fraction_used < 0.5 then
-    g = fraction_used * 2.0
-    r = 1.0
+    r = fraction_used * 2.0
+    b = 1.0
   else
-    g = 1.0
-    r = 2.0 * (1.0 - fraction_used)
+    r = 1.0
+    b = 2.0 * (1.0 - fraction_used)
   end
   return r, g, b
-end
-
--------------------
--- Battery Function
--------------------
-
-local function get_battery_percentage()
-  local handle = io.popen("upower -i $(upower -e | grep 'BAT') | grep -oP 'percentage:\\s*\\K[0-9]+'")
-  local result = handle:read("*a")
-  handle:close()
-  return tonumber(result) or 0
 end
 
 -----------
@@ -36,9 +37,8 @@ local function render(cr, width, height)
   cr:paint()
   cr:set_operator(2)
 
-	local battery_used = get_battery_percentage()
-  local fraction_used = math.max(0, battery_used / 100)
-  if fraction_used == 0 then return end
+  local fraction_used = get_volume()
+  if not fraction_used then return end
 
   local r, g, b = get_rgb(fraction_used)
 
@@ -50,6 +50,7 @@ local function render(cr, width, height)
   local total_span = (2 * math.pi) - (start_angle - end_angle)
 
   cr:set_line_width(circle)
+
   cr:set_line_cap(1)
   cr:set_source_rgba(0.19, 0.19, 0.19, 1.0)
   cr:arc(xc, yc, radius, start_angle, end_angle)
@@ -65,3 +66,4 @@ local function render(cr, width, height)
 end
 
 return render
+

@@ -23,6 +23,7 @@ in
 	home.homeDirectory = "/home/magoa";
 	home.sessionVariables.EDITOR = "nvim";
 	home.sessionVariables.VISUAL = "nvim";
+  xdg.enable = true;
 	imports = [
 		../../modules/neovim.nix
 		../../modules/fish.nix
@@ -96,6 +97,7 @@ in
       timer
       python3
       mako
+			gtk3 # for gtk-icon-browser
 	];
   services.mpd = {
     enable = true;
