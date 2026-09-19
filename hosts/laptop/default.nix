@@ -139,6 +139,7 @@ in
 		lua
 		pkgs.lua51Packages.lgi
 		cairo # for drawing in lua for Ironbar
+    pkgs.xwayland-satellite # for x11 app to use wayland
   ];
 	environment.variables = {
 		GI_TYPELIB_PATH = "${pkgs.upower}/lib/girepository-1.0";
