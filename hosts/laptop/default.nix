@@ -2,16 +2,22 @@
 
 let
   mountUid = toString config.users.users.magoa.uid;
-  mountGid = "100";  # NixOS's "users" group
+  mountGid = "100"; # "users" group
+
+  # Only filesystems without native Unix permissions accept these options.
+  ownershipOptions = {
+    vfat  = [ "uid=${mountUid}" "gid=${mountGid}" "fmask=0177" "dmask=077" ];
+    exfat = [ "uid=${mountUid}" "gid=${mountGid}" "fmask=0177" "dmask=077" ];
+  };
 
   autoMounts = [
-    { mountpoint = "/mnt/teapot";    uuid = "003B-3D17"; fsType = "exfat"; }
-    { mountpoint = "/mnt/coffeepot"; uuid = "67E3-17ED"; fsType = "vfat";  }
-    { mountpoint = "/mnt/usb"; uuid = "57F6-B30A"; fsType = "vfat";  }
-    { mountpoint = "/mnt/plain-hardrive"; uuid = "577E-0F94"; fsType = "vfat";  }
-    { mountpoint = "/mnt/rorqual"; uuid = "7d3796a2-6570-47c7-a5cf-0d3e33cefc37"; fsType = "ext4";  }
-    { mountpoint = "/mnt/loutre"; uuid = "acd63365-8604-4409-9339-11dd00e159bd"; fsType = "ext4";  }
-    { mountpoint = "/mnt/ebook"; uuid = "564A-6EB5"; fsType = "vfat";  }
+    { mountpoint = "/mnt/teapot";        uuid = "003B-3D17"; fsType = "exfat"; }
+    { mountpoint = "/mnt/coffeepot";     uuid = "67E3-17ED"; fsType = "vfat"; }
+    { mountpoint = "/mnt/usb";           uuid = "57F6-B30A"; fsType = "vfat"; }
+    { mountpoint = "/mnt/plain-hardrive"; uuid = "577E-0F94"; fsType = "vfat"; }
+    { mountpoint = "/mnt/rorqual";       uuid = "7d3796a2-6570-47c7-a5cf-0d3e33cefc37"; fsType = "ext4"; }
+    { mountpoint = "/mnt/loutre";        uuid = "acd63365-8604-4409-9339-11dd00e159bd"; fsType = "ext4"; }
+    { mountpoint = "/mnt/ebook";         uuid = "564A-6EB5"; fsType = "vfat"; }
   ];
 
   mkAutoMount = { mountpoint, uuid, fsType }: {
@@ -19,15 +25,14 @@ let
     value = {
       device = "/dev/disk/by-uuid/${uuid}";
       inherit fsType;
+      noCheck = true;
       options = [
         "nofail"
+        "users"                            # any user may umount (see note below)
         "x-systemd.automount"
-        "x-systemd.device-timeout=1ms"
-        "uid=${mountUid}"
-        "gid=${mountGid}"
-        "umask=0177"
-        "dmask=077"
-      ];
+        "x-systemd.device-timeout=5s"
+        "x-systemd.idle-timeout=60"        # unmount after 60s idle, safer for removable drives
+      ] ++ (ownershipOptions.${fsType} or [ ]);
     };
   };
 in
@@ -41,6 +46,8 @@ in
   boot.supportedFilesystems = [ "ntfs" "exfat" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Work around the UAS disconnects on the Seagate Expansion (0bc2:2037)
+  boot.kernelParams = [ "usb-storage.quirks=0bc2:2037:u" ];
 
   fileSystems = builtins.listToAttrs (map mkAutoMount autoMounts);
   networking.hostName = "nixos";
@@ -132,7 +139,6 @@ in
 		lua
 		pkgs.lua51Packages.lgi
 		cairo # for drawing in lua for Ironbar
-    nm-applet
   ];
 	environment.variables = {
 		GI_TYPELIB_PATH = "${pkgs.upower}/lib/girepository-1.0";
