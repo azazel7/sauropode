@@ -31,7 +31,7 @@ in
         DisableTelemetry = true;
         DisableFirefoxStudies = true;
         EnableTrackingProtection = {
-          Value= true;
+          Value = true;
           Locked = true;
           Cryptomining = true;
           Fingerprinting = true;
@@ -74,6 +74,7 @@ in
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             installation_mode = "force_installed";
+            default_private_browsing_allowed = true;
           };
           # Enhancer for YouTube
           "enhancerforyoutube@maximerf.addons.mozilla.org" = {
@@ -105,7 +106,7 @@ in
             default_private_browsing_allowed = true;
           };
           # Theme
-          # Need to download and install the them before setting it later on
+          # Need to download and install the theme before setting it later on
           "graffiti-bold-colorway@mozilla.org" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/graffiti-bold_/latest.xpi";
             installation_mode = "force_installed";
@@ -113,17 +114,17 @@ in
         };
         Permissions = {
           Camera = {
-            BlockNewRequests = false;  # false = sites CAN ask; true = auto-deny, no prompt
-              Locked = false;            # user can still change it in about:preferences if false
+            BlockNewRequests = false; # false = sites CAN ask; true = auto-deny, no prompt
+            Locked = false; # user can still change it in about:preferences if false
           };
           Microphone = {
             BlockNewRequests = false;
             Locked = false;
           };
-          Notifications = { BlockNewRequests = false; };  # or true, if you're tired of the prompts
-            Autoplay = {
-              Default = "block-audio";  # or "allow-audio-video" / "block-audio-video"
-            };
+          Notifications = { BlockNewRequests = false; }; # or true, if you're tired of the prompts
+          Autoplay = {
+            Default = "block-audio"; # or "allow-audio-video" / "block-audio-video"
+          };
         };
 
         /* ---- COOKIE POLICY ---- */
@@ -185,41 +186,41 @@ in
             "privacy.clearOnShutdown.cookies" = true;
             "privacy.clearOnShutdown.cache" = true;
             "browser.toolbars.bookmarks.visibility" = "always"; # or "newtab" / "never"
-              /*New Tab wallpaper*/
+            /*New Tab wallpaper*/
             "browser.newtabpage.activity-stream.newtabWallpapers.enabled" = true;
             "browser.newtabpage.activity-stream.newtabWallpapers.wallpaper" = newtabWallpaperId;
           };
           bookmarks = {
             force = true;
             settings = [
-            # A bookmark on the toolbar, in a folder
-            {
-              name = "Toolbar";
-              toolbar = true;
-              bookmarks = [
-                { name = "FireMem";  url = "about:memory"; }
-                { name = "Desjardin"; url = "https://accweb.mouv.desjardins.com/identifiantunique/securite-garantie/authentification/auth/simple/0?domaineVirtuel=desjardins&langueCible=fr"; }
-                { name = "Google Chat";  url = "https://chat.google.com/app/home"; }
-                { name = "Google Meeting";  url = "https://meet.google.com/ids-ftpy-nab?pli=1"; }
-                { name = "Thailong";  url = "https://thailong.fliipapp.com/home/login"; }
+              # A bookmark on the toolbar, in a folder
+              {
+                name = "Toolbar";
+                toolbar = true;
+                bookmarks = [
+                  { name = "FireMem"; url = "about:memory"; }
+                  { name = "Desjardin"; url = "https://accweb.mouv.desjardins.com/identifiantunique/securite-garantie/authentification/auth/simple/0?domaineVirtuel=desjardins&langueCible=fr"; }
+                  { name = "Google Chat"; url = "https://chat.google.com/app/home"; }
+                  { name = "Google Meeting"; url = "https://meet.google.com/ids-ftpy-nab?pli=1"; }
+                  { name = "Thailong"; url = "https://thailong.fliipapp.com/home/login"; }
 
 
-              ];
-            }
+                ];
+              }
 
-            /* Bookmarks in the regular Bookmarks Menu (not on the toolbar) */
+              /* Bookmarks in the regular Bookmarks Menu (not on the toolbar) */
               {
                 name = "Streaming";
                 bookmarks = [
-                { name = "YouTube"; url = "https://youtube.com"; }
-                { name = "Twitch Clemovitch";  url = "https://www.twitch.tv/clemovitch/schedule"; }
-                { name = "Twitch Nat_Ali";  url = "https://www.twitch.tv/nat_ali/schedule"; }
+                  { name = "YouTube"; url = "https://youtube.com"; }
+                  { name = "Twitch Clemovitch"; url = "https://www.twitch.tv/clemovitch/schedule"; }
+                  { name = "Twitch Nat_Ali"; url = "https://www.twitch.tv/nat_ali/schedule"; }
                 ];
               }
               {
                 name = "Dev";
                 bookmarks = [
-                  { name = "NixOS";  url = "https://nixos.org"; }
+                  { name = "NixOS"; url = "https://nixos.org"; }
                   { name = "GitHub"; url = "https://github.com"; }
                   { name = "Home Manager options"; url = "https://nix-community.github.io/home-manager/options.xhtml"; }
                   { name = "MyNixOS"; url = "https://mynixos.com"; }
@@ -228,20 +229,20 @@ in
               {
                 name = "Rust";
                 bookmarks = [
-                  { name = "Utils";  url = "https://rustutils.com"; }
+                  { name = "Utils"; url = "https://rustutils.com"; }
                   { name = "Blog"; url = "https://blog.rust-lang.org"; }
                   { name = "Home Manager options"; url = "https://nix-community.github.io/home-manager/options.xhtml"; }
                   { name = "MyNixOS"; url = "https://mynixos.com"; }
                 ];
               }
 
-            /* A standalone bookmark with a keyword shortcut + tags */
-            {
-              name = "Wikipedia";
-              url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
-              keyword = "wiki";       # type "wiki <term>" in the address bar
+              /* A standalone bookmark with a keyword shortcut + tags */
+              {
+                name = "Wikipedia";
+                url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
+                keyword = "wiki"; # type "wiki <term>" in the address bar
                 tags = [ "reference" ];
-            }
+              }
             ];
           };
 
@@ -251,13 +252,13 @@ in
   };
   home.activation.firefoxNewtabWallpaper =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    wallpaper_dir="$HOME/.mozilla/firefox/profile_0/wallpaper"
+      wallpaper_dir="$HOME/.mozilla/firefox/profile_0/wallpaper"
 
-    mkdir -p "$wallpaper_dir"
+      mkdir -p "$wallpaper_dir"
 
-    ln -sfn \
-    "${newtabWallpaper}" \
-    "$wallpaper_dir/${newtabWallpaperId}.svg"
+      ln -sfn \
+      "${newtabWallpaper}" \
+      "$wallpaper_dir/${newtabWallpaperId}.svg"
     '';
 }
 
