@@ -126,7 +126,6 @@ in
     neovim
     wget
     alacritty
-    git
     vlc
     pavucontrol
     brightnessctl
