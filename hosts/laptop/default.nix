@@ -152,6 +152,8 @@ in
   programs.fish.enable = true;
   # For fish. CRITICAL FOR FLAKES: Disable the standard channel-based command-not-found handler
   programs.command-not-found.enable = false;
+
+  # for desktop application
   programs.xwayland.enable = true;
   programs.niri.enable = true;
 }
