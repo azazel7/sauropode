@@ -51,7 +51,7 @@ in
       anchor = "top-right";
       layer = "overlay";
       sort = "-time";
-      max-visible = 5;
+      max-visible = 10;
       group-by = "app-name";
 
       # --- Icons ---
@@ -60,7 +60,7 @@ in
       icon-path = "/run/current-system/sw/share/icons/hicolor";
 
       # --- Timing ---
-      default-timeout = 5000;
+      default-timeout = 10000;
       ignore-timeout = false;
 
       # --- Progress bar (volume/brightness OSD notifications) ---
