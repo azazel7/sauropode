@@ -129,12 +129,9 @@ in
     vlc
     pavucontrol
     brightnessctl
-    ironbar
     htop
     btop
     ncdu
-    sunsetr
-    libnotify # for desktop notification
 		lua
 		pkgs.lua51Packages.lgi
 		cairo # for drawing in lua for Ironbar
