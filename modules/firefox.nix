@@ -74,7 +74,7 @@ in
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             installation_mode = "force_installed";
-            default_private_browsing_allowed = true;
+            private_browsing = true;
           };
           # Enhancer for YouTube
           "enhancerforyoutube@maximerf.addons.mozilla.org" = {
@@ -85,25 +85,25 @@ in
           "jid1-KKzOGWgsW3Ao4Q@jetpack" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/i-dont-care-about-cookies/latest.xpi";
             installation_mode = "force_installed";
-            default_private_browsing_allowed = true;
+            private_browsing = true;
           };
           # PassFF
           "passff@invicem.pro" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/passff/latest.xpi";
             installation_mode = "force_installed";
-            default_private_browsing_allowed = true;
+            private_browsing = true;
           };
           # Disconnect
           "2.0@disconnect.me" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/disconnect/latest.xpi";
             installation_mode = "force_installed";
-            default_private_browsing_allowed = true;
+            private_browsing = true;
           };
           # Vimium
           "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
             installation_mode = "force_installed";
-            default_private_browsing_allowed = true;
+            private_browsing = true;
           };
           # Theme
           # Need to download and install the theme before setting it later on
