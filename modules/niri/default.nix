@@ -12,6 +12,7 @@ in
   imports = [
     ../pamixer.nix
     ../sunsetr.nix
+    ../satty.nix
   ];
 
   home.packages = with pkgs; [
