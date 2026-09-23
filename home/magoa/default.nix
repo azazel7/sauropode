@@ -2,9 +2,18 @@
 
 let
   dotfiles = "${config.home.homeDirectory}/sauropode/dotfiles";
-  link = subpath: {
-    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${subpath}";
-    recursive = true;
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  # Standard .config/directory
+  configs = {
+    nvim = "nvim";
+    ranger = "ranger";
+    niri = "niri";
+    fuzzel = "fuzzel";
+    ironbar = "ironbar";
+    ncmpcpp = "ncmpcpp";
+    vlc = "vlc";
+    sunsetr = "sunsetr";
+    rmpc = "rmpc";
   };
 in
 
@@ -19,16 +28,27 @@ in
 		../../modules/neovim.nix
 		../../modules/fish.nix
 		../../modules/firefox.nix
+		../../modules/pamixer.nix
+		../../modules/sunsetr.nix
     ../../modules/niri/default.nix
     # inputs.noctalia.homeModules.default
 	];
-  xdg.configFile = {
-    nvim    = link "nvim";
-    ranger  = link "ranger";
-    ncmpcpp = link "ncmpcpp";
-    vlc     = link "vlc";
-    rmpc    = link "rmpc";
-  };
+	# programs.noctalia = {
+ #      enable = true;
+	#
+ #      settings = { # This may also be a string or path to a .toml file.
+ #        theme = {
+ #          mode = "dark";
+ #          source = "builtin";
+ #          builtin = "Catppuccin";
+ #        };
+	#
+ #        # wallpaper = {
+ #        #   enabled = true;
+ #        #   default.path = "/path/to/wallpapers/wallpaper.png";
+ #        # };
+ #      };
+	# };
 	home.stateVersion = "26.05";
 	programs.bash = {
 		enable = true;
@@ -55,13 +75,17 @@ in
       jaq
       lsd /* better ls */
 			ranger
+      thunderbird
       obsidian
+      satty /* --- for screenshot */
+      pamixer
       avidemux
       thunderbird
       qtpass
       evince
       blueman
       yt-dlp
+      fuzzel
       gcolor3
       cmatrix
       cbonsai
@@ -73,6 +97,7 @@ in
       rmpc
       timer
       python3
+      mako
 			gtk3 # for gtk-icon-browser
 	];
   services.mpd = {
@@ -96,5 +121,10 @@ in
 #     };
 #   };
 # };
+# Iterate over xdg configs and map them accordingly
+	xdg.configFile = builtins.mapAttrs (name: subpath: {
+			source = create_symlink "${dotfiles}/${subpath}";
+			recursive = true;
+			}) configs;
 
 }
