@@ -21,7 +21,7 @@ in
     libnotify /* for notification on desktop */
     fuzzel  /* app launcher */
     pamixer /* for shortcut and controling audio volume */
-    satty /* --- for screenshot */
+    nomacs
   ];
 
   # Config files symlinked from your dotfiles repo
