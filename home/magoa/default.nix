@@ -77,15 +77,12 @@ in
 			ranger
       thunderbird
       obsidian
-      satty /* --- for screenshot */
-      pamixer
       avidemux
       thunderbird
       qtpass
       evince
       blueman
       yt-dlp
-      fuzzel
       gcolor3
       cmatrix
       cbonsai
@@ -97,7 +94,6 @@ in
       rmpc
       timer
       python3
-      mako
 			gtk3 # for gtk-icon-browser
 	];
   services.mpd = {
