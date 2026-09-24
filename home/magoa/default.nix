@@ -2,19 +2,11 @@
 
 let
   dotfiles = "${config.home.homeDirectory}/sauropode/dotfiles";
-  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-  # Standard .config/directory
-  configs = {
-    nvim = "nvim";
-    ranger = "ranger";
-    niri = "niri";
-    fuzzel = "fuzzel";
-    ironbar = "ironbar";
-    ncmpcpp = "ncmpcpp";
-    vlc = "vlc";
-    sunsetr = "sunsetr";
-    rmpc = "rmpc";
+  link = subpath: {
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${subpath}";
+    recursive = true;
   };
+
 in
 
 
@@ -33,6 +25,14 @@ in
     ../../modules/niri/default.nix
     # inputs.noctalia.homeModules.default
 	];
+  xdg.configFile = {
+    btop     = link "btop";
+    ncmpcpp  = link "ncmpcpp";
+    nvim     = link "nvim";
+    ranger   = link "ranger";
+    rmpc     = link "rmpc";
+    vlc      = link "vlc";
+  };
 	# programs.noctalia = {
  #      enable = true;
 	#
@@ -106,21 +106,5 @@ in
       }
     '';
   };
-
-# need more up to date packages
-# programs.satty = {
-#   enable = true;
-#   settings = {
-#     general = {
-#       fullscreen = false;
-#       initial-tool = "brush";
-#     };
-#   };
-# };
-# Iterate over xdg configs and map them accordingly
-	xdg.configFile = builtins.mapAttrs (name: subpath: {
-			source = create_symlink "${dotfiles}/${subpath}";
-			recursive = true;
-			}) configs;
 
 }
