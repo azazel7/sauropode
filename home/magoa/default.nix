@@ -26,12 +26,13 @@ in
     # inputs.noctalia.homeModules.default
 	];
   xdg.configFile = {
-    btop     = link "btop";
-    ncmpcpp  = link "ncmpcpp";
-    nvim     = link "nvim";
-    ranger   = link "ranger";
-    rmpc     = link "rmpc";
-    vlc      = link "vlc";
+    btop         = link "btop";
+    ncmpcpp      = link "ncmpcpp";
+    nvim         = link "nvim";
+    ranger       = link "ranger";
+    rmpc         = link "rmpc";
+    vlc          = link "vlc";
+    transmission = link "transmission";
   };
 	# programs.noctalia = {
  #      enable = true;
@@ -78,7 +79,6 @@ in
       thunderbird
       obsidian
       avidemux
-      thunderbird
       qtpass
       evince
       blueman
