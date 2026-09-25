@@ -33,6 +33,7 @@ in
     rmpc         = link "rmpc";
     vlc          = link "vlc";
     transmission = link "transmission";
+    mgba         = link "mgba";
   };
 	home.stateVersion = "26.05";
 	programs.bash = {
@@ -79,6 +80,7 @@ in
       timer
       python3
       handbrake
+      mgba
 	];
   services.mpd = {
     enable = true;
