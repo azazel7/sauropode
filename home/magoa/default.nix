@@ -94,7 +94,7 @@ in
       rmpc
       timer
       python3
-			gtk3 # for gtk-icon-browser
+      handbrake
 	];
   services.mpd = {
     enable = true;
