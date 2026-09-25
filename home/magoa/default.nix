@@ -23,6 +23,7 @@ in
 		../../modules/pamixer.nix
 		../../modules/sunsetr.nix
     ../../modules/niri/default.nix
+		../../modules/flowblade.nix
     # inputs.noctalia.homeModules.default
 	];
   xdg.configFile = {
