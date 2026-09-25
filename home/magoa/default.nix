@@ -24,7 +24,6 @@ in
 		../../modules/sunsetr.nix
     ../../modules/niri/default.nix
 		../../modules/flowblade.nix
-    # inputs.noctalia.homeModules.default
 	];
   xdg.configFile = {
     btop         = link "btop";
@@ -35,22 +34,6 @@ in
     vlc          = link "vlc";
     transmission = link "transmission";
   };
-	# programs.noctalia = {
- #      enable = true;
-	#
- #      settings = { # This may also be a string or path to a .toml file.
- #        theme = {
- #          mode = "dark";
- #          source = "builtin";
- #          builtin = "Catppuccin";
- #        };
-	#
- #        # wallpaper = {
- #        #   enabled = true;
- #        #   default.path = "/path/to/wallpapers/wallpaper.png";
- #        # };
- #      };
-	# };
 	home.stateVersion = "26.05";
 	programs.bash = {
 		enable = true;
