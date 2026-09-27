@@ -24,6 +24,7 @@ in
 		../../modules/sunsetr.nix
     ../../modules/niri/default.nix
 		../../modules/flowblade.nix
+		../../modules/pdftk.nix
 	];
   xdg.configFile = {
     btop         = link "btop";
