@@ -42,15 +42,27 @@ in
 			ll = "lsd -lah";
 		};
 	};
-	programs.git = {
-		enable = true;
-		settings = {
-			user = {
-				name = "Martin";
-				email = "martin@example.com";
-			};
-		};
-	};
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Martin";
+        email = "martin@example.com";
+      };
+      alias = {
+        tree = "log --graph --pretty=oneline --abbrev-commit";
+      };
+      branch = {
+        autosetuprebase = "always";
+      };
+      pull = {
+        rebase = true;
+      };
+      rebase = {
+        autoStash = true;
+      };
+    };
+  };
 
 	home.packages = with pkgs; [
 			ripgrep
