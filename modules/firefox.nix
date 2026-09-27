@@ -19,6 +19,7 @@ in
       enable = true;
       languagePacks = [ "fr" ];
 
+      nativeMessagingHosts = [ pkgs.passff-host ];
       /* ---- GLOBAL POLICIES & EXTENSIONS ---- */
       # Home Manager natively supports enterprise policies here.
       # This removes the need to manually wrap the package.

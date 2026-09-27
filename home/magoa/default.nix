@@ -76,6 +76,7 @@ in
       thunderbird
       obsidian
       avidemux
+      pass
       qtpass
       evince
       blueman

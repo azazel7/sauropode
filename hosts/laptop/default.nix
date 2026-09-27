@@ -156,4 +156,10 @@ in
   # for desktop application
   programs.xwayland.enable = true;
   programs.niri.enable = true;
+
+  # Optional: Enable the GPG agent (recommended for git signing, pinentry, etc.)
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true; # If using GPG for SSH keys
+  };
 }
