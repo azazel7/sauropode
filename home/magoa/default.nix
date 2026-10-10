@@ -100,6 +100,7 @@ in
       discord
       weechat
       imagemagick
+      go-mtpfs
 	];
   services.mpd = {
     enable = true;
