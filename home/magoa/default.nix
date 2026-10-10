@@ -101,6 +101,7 @@ in
       weechat
       imagemagick
       go-mtpfs
+      libreoffice-fresh
 	];
   services.mpd = {
     enable = true;
