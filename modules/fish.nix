@@ -64,6 +64,7 @@
       reboot = "systemctl reboot";
       find = "fd";
       jo = "_zoxide_and_open";
+      htop = "btop";
     };
 
     # Native fish configuration, custom functions, and interactive bindings

@@ -129,7 +129,6 @@ in
     vlc
     pavucontrol
     brightnessctl
-    htop
     btop
     ncdu
 		lua
