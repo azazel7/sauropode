@@ -96,6 +96,7 @@ in
       python3
       handbrake
       mgba
+      discord
 	];
   services.mpd = {
     enable = true;
