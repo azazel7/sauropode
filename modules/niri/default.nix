@@ -21,6 +21,7 @@ in
     libnotify /* for notification on desktop */
     fuzzel  /* app launcher */
     pamixer /* for shortcut and controling audio volume */
+    swaylock /* for locking the screen */
     nomacs
   ];
 
