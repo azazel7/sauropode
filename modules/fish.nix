@@ -28,7 +28,6 @@
     # Universal environment variables for this user session
 #   home.sessionVariables = {
 #     GREP_COLOR = "31";
-#     MANPAGER = "most -s";
 #     BROWSER = "firefox";
 #     GTEST_COLOR = "1";
 #     __GL_YIELD = "USLEEP";
