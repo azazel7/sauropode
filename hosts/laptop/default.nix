@@ -161,4 +161,5 @@ in
     enable = true;
     enableSSHSupport = true; # If using GPG for SSH keys
   };
+  services.flatpak.enable = true;
 }
