@@ -25,6 +25,7 @@ in
     ../../modules/niri/default.nix
 		../../modules/flowblade.nix
 		../../modules/pdftk.nix
+		../../modules/shikane.nix
 	];
   xdg.configFile = {
     btop         = link "btop";
@@ -106,5 +107,4 @@ in
       }
     '';
   };
-
 }
