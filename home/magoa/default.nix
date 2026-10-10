@@ -26,6 +26,7 @@ in
 		../../modules/flowblade.nix
 		../../modules/pdftk.nix
 		../../modules/shikane.nix
+    ./scheduled.nix
 	];
   xdg.configFile = {
     btop         = link "btop";
