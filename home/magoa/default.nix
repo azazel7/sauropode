@@ -98,6 +98,8 @@ in
       handbrake
       mgba
       discord
+      weechat
+      imagemagick
 	];
   services.mpd = {
     enable = true;
