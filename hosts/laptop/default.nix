@@ -11,13 +11,13 @@ let
   };
 
   autoMounts = [
-    { mountpoint = "/mnt/teapot";        uuid = "003B-3D17"; fsType = "exfat"; }
-    { mountpoint = "/mnt/coffeepot";     uuid = "67E3-17ED"; fsType = "vfat"; }
-    { mountpoint = "/mnt/usb";           uuid = "57F6-B30A"; fsType = "vfat"; }
-    { mountpoint = "/mnt/plain-hardrive"; uuid = "577E-0F94"; fsType = "vfat"; }
-    { mountpoint = "/mnt/rorqual";       uuid = "7d3796a2-6570-47c7-a5cf-0d3e33cefc37"; fsType = "ext4"; }
-    { mountpoint = "/mnt/loutre";        uuid = "acd63365-8604-4409-9339-11dd00e159bd"; fsType = "ext4"; }
-    { mountpoint = "/mnt/ebook";         uuid = "564A-6EB5"; fsType = "vfat"; }
+    { mountpoint = "/media/teapot";        uuid = "003B-3D17"; fsType = "exfat"; }
+    { mountpoint = "/media/coffeepot";     uuid = "67E3-17ED"; fsType = "vfat"; }
+    { mountpoint = "/media/usb";           uuid = "57F6-B30A"; fsType = "vfat"; }
+    { mountpoint = "/media/plain-hardrive"; uuid = "577E-0F94"; fsType = "vfat"; }
+    { mountpoint = "/media/rorqual";       uuid = "7d3796a2-6570-47c7-a5cf-0d3e33cefc37"; fsType = "ext4"; }
+    { mountpoint = "/media/loutre";        uuid = "acd63365-8604-4409-9339-11dd00e159bd"; fsType = "ext4"; }
+    { mountpoint = "/media/ebook";         uuid = "564A-6EB5"; fsType = "vfat"; }
   ];
 
   mkAutoMount = { mountpoint, uuid, fsType }: {
