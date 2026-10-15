@@ -13,6 +13,15 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+
+    rust-overlay.url = "github:oxalica/rust-overlay";
+
+    clown = {
+      url = "github:F4r3n/clown";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
+
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {

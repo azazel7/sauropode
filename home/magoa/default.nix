@@ -102,6 +102,7 @@ in
       imagemagick
       go-mtpfs
       libreoffice-fresh
+      inputs.clown.packages.${pkgs.system}.default
 	];
   services.mpd = {
     enable = true;
