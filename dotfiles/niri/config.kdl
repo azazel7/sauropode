@@ -137,9 +137,14 @@ layout {
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$|^Incrustation vidéo$"
     match app-id=r#"gcolor3"# 
-    match app-id=r#"vlc"# 
     match app-id=r#"mgba"# 
     open-floating true
+    default-floating-position x=0 y=0
+}
+window-rule {
+    match app-id=r#"vlc"# 
+    open-floating true
+    default-floating-position x=0 y=0
 }
 // Example: enable rounded corners for all windows.
 window-rule {
