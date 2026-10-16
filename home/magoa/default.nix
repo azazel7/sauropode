@@ -92,7 +92,6 @@ in
       mpd
       ncmpcpp
       mpc
-      rmpc
       timer
       python3
       handbrake
