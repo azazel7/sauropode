@@ -197,10 +197,11 @@ window-rule {
     match title=r#".*(Open|Save|Select).*"#
     match title=r#".*File.*"#
     match app-id=r#"org\.gtk\.FileChooserDialog"#
+    match app-id=r#"avidemux"# title=r#".*Select Video File.*"#
     open-floating true
-    default-column-width { proportion 0.0; }
-    max-width 800
-    max-height 1000
+    // default-column-width { proportion 0.0; }
+    // max-width 800
+    // max-height 1000
 }
 
 window-rule {
