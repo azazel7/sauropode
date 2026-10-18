@@ -119,7 +119,7 @@ layout {
         // active-color "#aa0fd4"
         // for active windows on other monitor
         inactive-color "#505050"
-        active-gradient from="#bf2b0d" to="#c7ff7f" angle=45
+        active-gradient from="#bf0d10" to="#4f0dbf" angle=45
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
@@ -128,8 +128,8 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
+        left 16
+        right 16
         // top 64
         // bottom 64
     }
@@ -155,6 +155,28 @@ window-rule {
 window-rule {
     geometry-corner-radius 8
     clip-to-geometry true
+}
+window-rule {
+    match is-floating=true
+    shadow {
+        on
+        // off
+        softness 15
+        spread 2
+        offset x=0 y=0
+        draw-behind-window true
+        color "#c385df64"
+        inactive-color "#00000064"
+    }
+}
+window-rule {
+    match is-window-cast-target=true
+    border { 
+      on
+      width 4
+      active-color "#f38ba8" 
+      inactive-color "#7d0d2d"
+    }
 }
 window-rule {
     match app-id=r#"thunderbird" title=r#".*Password Required.*"#
@@ -203,6 +225,13 @@ window-rule {
     match app-id=r#"Bitwarden"# title=r#".*unlock.*"#
     open-floating true
 }
+window-rule {
+    match app-id=r#"org\.keepassxc\.KeePassXC"#
+    match app-id=r#"Bitwarden"#
+    match app-id=r#"qtpass"#
+    block-out-from "screen-capture"
+}
+
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -226,24 +255,28 @@ binds {
     Mod+R  hotkey-overlay-title="Open Launcher" { spawn "fuzzel"; }
 
 
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
-    Mod+Shift+3 { move-column-to-workspace 3; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
-    Mod+Shift+6 { move-column-to-workspace 6; }
-    Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
+    // This short cut does not work, use the shortcut below Mod+1 { focus-workspace 1; }
+    Mod+ampersand   { focus-workspace 1; }
+    Mod+eacute      { focus-workspace 2; }
+    Mod+quotedbl    { focus-workspace 3; }
+    Mod+apostrophe  { focus-workspace 4; }
+    Mod+parenleft   { focus-workspace 5; }
+    Mod+minus       { focus-workspace 6; }
+    Mod+egrave      { focus-workspace 7; }
+    Mod+underscore  { focus-workspace 8; }
+    Mod+ccedilla    { focus-workspace 9; }
+
+    Mod+Shift+ampersand   { move-column-to-workspace 1; }
+    Mod+Shift+eacute      { move-column-to-workspace 2; }
+    Mod+Shift+quotedbl    { move-column-to-workspace 3; }
+    Mod+Shift+apostrophe  { move-column-to-workspace 4; }
+    Mod+Shift+parenleft   { move-column-to-workspace 5; }
+    Mod+Shift+minus       { move-column-to-workspace 6; }
+    Mod+Shift+egrave      { move-column-to-workspace 7; }
+    Mod+Shift+underscore  { move-column-to-workspace 8; }
+    //shortcut used elsewhere to resize window
+    //Mod+Shift+ccedilla    { move-column-to-workspace 9; }
+
     Mod+J              { focus-workspace-down; }
     Mod+K              { focus-workspace-up; }
     Mod+Shift+J cooldown-ms=150 { move-column-to-workspace-down; }
@@ -301,6 +334,10 @@ binds {
     XF86AudioPrev    allow-when-locked=true { spawn-sh "mpc prev"; }
     XF86AudioNext    allow-when-locked=true { spawn-sh "mpc next"; }
 
+    // Brightness
+    XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "brightnessctl set +5%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "brightnessctl set 5%-"; }
+
     // Utility stuf
     Print { spawn-sh "satty-simple"; }
     Ctrl+Print { screenshot-screen; }
@@ -312,7 +349,7 @@ binds {
     Mod+End  { focus-column-last; }
     Mod+Tab { focus-workspace-previous; }
     Mod+Escape { focus-window-previous; }
-    Mod+D { focus-workspace 99 ; }
+    Mod+D { focus-workspace 250 ; }
 
     Mod+Shift+R { spawn-sh "ironbar reload"; }
     // Mod+X iconify/minimize
