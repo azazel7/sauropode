@@ -142,9 +142,14 @@ window-rule {
     default-floating-position x=0 y=0
 }
 window-rule {
-    match app-id=r#"vlc"# 
+    // Default opening for media player
+    match app-id=r#"vlc"# title=r#"VLC media player"#
+    // default opening for screenshot (satty)
+    match app-id=r#"com.gabm.satty"#
     open-floating true
-    default-floating-position x=0 y=0
+    default-column-width { proportion 0.8; }
+    default-window-height { proportion 0.8; }
+
 }
 // Example: enable rounded corners for all windows.
 window-rule {
@@ -152,31 +157,23 @@ window-rule {
     clip-to-geometry true
 }
 window-rule {
+    match app-id=r#"thunderbird" title=r#".*Password Required.*"#
+    match app-id=r#"thunderbird" title=r#".*Reminder.*"#
+    open-floating true
+}
+window-rule {
     match app-id=r#"firefox"#
     match app-id=r#"google-chrome"#
     match app-id=r#"code"#
     match app-id=r#"obsidian$"#
+    match app-id=r#"thunderbird"#
     open-maximized true
 }
 
 // File dialogs - Open/Save/Select
 window-rule {
     match title=r#".*(Open|Save|Select).*"#
-    open-floating true
-    default-column-width { proportion 0.0; }
-    max-width 800
-    max-height 1000
-}
-
-window-rule {
     match title=r#".*File.*"#
-    open-floating true
-    default-column-width { proportion 0.0; }
-    max-width 800
-    max-height 1000
-}
-
-window-rule {
     match app-id=r#"org\.gtk\.FileChooserDialog"#
     open-floating true
     default-column-width { proportion 0.0; }
@@ -196,10 +193,6 @@ window-rule {
 // Authentication dialogs
 window-rule {
     match app-id=r#"org\.kde\.polkit-kde-authentication-agent-1"#
-    open-floating true
-}
-
-window-rule {
     match title=r#".*Authentication.*"#
     open-floating true
 }
@@ -207,10 +200,6 @@ window-rule {
 // Password managers
 window-rule {
     match app-id=r#"org\.keepassxc\.KeePassXC"# title=r#".*Auto-Type.*"#
-    open-floating true
-}
-
-window-rule {
     match app-id=r#"Bitwarden"# title=r#".*unlock.*"#
     open-floating true
 }
